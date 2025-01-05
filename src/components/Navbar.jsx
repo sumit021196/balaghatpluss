@@ -1,19 +1,43 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Navbar.css';
+import React, { useState } from 'react';
+import './Navbar.css'; // Import the CSS file
 
 const Navbar = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobile(!isMobile);
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo">Balaghat Plus</Link>
-        <ul className="navbar-links">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/category/restaurants">Restaurants</Link></li>
-          <li><Link to="/category/shops">Shops</Link></li>
-          <li><Link to="/category/services">Services</Link></li>
-          <li><Link to="/category/health">Health & Wellness</Link></li>
-        </ul>
+        {/* Brand Name */}
+        <div className="brand-name">
+          <a href="/">MyBrand</a>
+        </div>
+
+        {/* Search Bar */}
+        <div className="search-bar">
+          <input type="text" placeholder="Search..." />
+          <i className="search-icon">🔍</i>
+        </div>
+
+        {/* Hamburger Menu */}
+        <div className="hamburger" onClick={toggleMobileMenu}>
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
+        </div>
+
+        {/* Menu for Desktop & Mobile */}
+        <div className={`menu ${isMobile ? 'active' : ''}`}>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
       </div>
     </nav>
   );
