@@ -13,7 +13,7 @@ const Navbar = () => {
       <div className="navbar-container">
         {/* Brand Name */}
         <div className="brand-name">
-          <a href="/">MyBrand</a>
+          <a href="/">Balaghat+</a>
         </div>
 
         {/* Search Bar */}
@@ -34,7 +34,7 @@ const Navbar = () => {
           <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/about">About</a></li>
-            <li><a href="/services">Services</a></li>
+            <li><a href="/CategoryPage">Services</a></li>
             <li><a href="/contact">Contact</a></li>
           </ul>
         </div>

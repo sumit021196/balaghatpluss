@@ -2,18 +2,21 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
+import ResponsiveAppBar from'./ResponsiveAppBar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import CategoryPage from './pages/CategoryPage';
 import BusinessDetails from './pages/BusinessDetails';
 import Navbar from './components/Navbar';
 
+
+
 function App() {
   return (
     <Router>
+     
       <div className="App">
-        <Header />
+      <ResponsiveAppBar/>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -22,6 +25,7 @@ function App() {
         </Routes>
         <Footer />
       </div>
+    
     </Router>
   );
 }
