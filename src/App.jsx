@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import CategoryPage from './pages/CategoryPage';
 import BusinessDetails from './pages/BusinessDetails';
-import Navbar from './components/Navbar';
+import ResponsiveGrid from './ResponsiveGrid'
 
 
 
@@ -17,7 +17,7 @@ function App() {
      
       <div className="App">
       <ResponsiveAppBar/>
-        <Navbar />
+       <ResponsiveGrid/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/category/:categoryId" element={<CategoryPage />} />

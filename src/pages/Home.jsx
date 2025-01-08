@@ -7,7 +7,7 @@ const Home = () => {
 
     <div className="home">
      
-      <h1>Welcome to the Balaghat Plus</h1>
+      <h1>Welcome Plus</h1>
       <p>Explore businesses by category:</p>
       <ul>
         {categories.map((category, index) => (
