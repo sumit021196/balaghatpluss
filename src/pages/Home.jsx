@@ -1,4 +1,6 @@
 import React from 'react';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 const Home = () => {
   const categories = ["Restaurants", "Shops", "Services", "Health & Wellness"];
@@ -14,6 +16,7 @@ const Home = () => {
           <li key={index}>{category}</li>
         ))}
       </ul>
+      <DeleteIcon />
     </div>
   );
 };
