@@ -51,7 +51,7 @@ export default function RecipeReviewCard() {
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+            S
           </Avatar>
         }
         action={
@@ -65,7 +65,7 @@ export default function RecipeReviewCard() {
       <CardMedia
         component="img"
         height="194"
-        image="/static/images/cards/paella.jpg"
+        image="/src/assets/diet.png"
         alt="Paella dish"
       />
       <CardContent>
