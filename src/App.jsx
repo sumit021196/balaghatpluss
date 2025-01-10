@@ -7,8 +7,8 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import CategoryPage from './pages/CategoryPage';
 import BusinessDetails from './pages/BusinessDetails';
-import ResponsiveGrid from './ResponsiveGrid'
-
+import RecipeReviewCard from './RecipeReviewCard';
+import IconLabelGrid from './IconLabelGrid';
 
 
 function App() {
@@ -17,7 +17,10 @@ function App() {
      
       <div className="App">
       <ResponsiveAppBar/>
-       <ResponsiveGrid/>
+      <IconLabelGrid/>
+       <RecipeReviewCard/>
+     
+     
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/category/:categoryId" element={<CategoryPage />} />
