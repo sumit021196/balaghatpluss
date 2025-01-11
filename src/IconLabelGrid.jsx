@@ -4,16 +4,18 @@ import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import DeleteIcon from '@mui/icons-material/Delete';
-import SaveIcon from '@mui/icons-material/Save';
-import EditIcon from '@mui/icons-material/Edit';
+import FastfoodIcon from '@mui/icons-material/Fastfood';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import SendIcon from '@mui/icons-material/Send';
 import HomeIcon from '@mui/icons-material/Home';
+import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
+
 
 const buttons = [
-  { id: 1, name: 'Delete', icon: <DeleteIcon /> },
-  { id: 2, name: 'Save', icon: <SaveIcon /> },
-  { id: 3, name: 'Edit', icon: <EditIcon /> },
+  { id: 1, name: 'Hospital',icon: <MedicalServicesIcon /> },
+  { id: 2, name: 'Food', icon: <FastfoodIcon /> },
+  { id: 3, name: 'Geocery', icon: <ShoppingCartIcon /> },
   { id: 4, name: 'Upload', icon: <CloudUploadIcon /> },
   { id: 5, name: 'Send', icon: <SendIcon /> },
   { id: 6, name: 'Home', icon: <HomeIcon /> },
