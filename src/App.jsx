@@ -8,7 +8,8 @@ import Home from './pages/Home';
 import CategoryPage from './pages/CategoryPage';
 import BusinessDetails from './pages/BusinessDetails';
 import RecipeReviewCard from './RecipeReviewCard';
-import IconLabelGrid from './IconLabelGrid';
+import IconLabelGrid from './IconLabelGrid'; 
+import LabelBottomNavigation  from './LabelBottomNavigation'
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/business/:businessId" element={<BusinessDetails />} />
         </Routes>
         <Footer />
+        <LabelBottomNavigation/>
       </div>
     
     </Router>
