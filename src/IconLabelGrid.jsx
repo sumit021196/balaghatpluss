@@ -8,6 +8,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
+import { useNavigate } from 'react-router-dom';
 
 const buttons = [
   { id: 1, name: 'Hospital', icon: <MedicalServicesIcon /> },
@@ -19,6 +20,12 @@ const buttons = [
 ];
 
 export default function IconLabelGrid() {
+  const navigate = useNavigate();
+
+  const handleButtonClick = (name) => {
+    navigate(`/category/${name}`);
+  };
+
   return (
     <Box sx={{ flexGrow: 1, padding: 2 }}>
       <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
@@ -29,6 +36,7 @@ export default function IconLabelGrid() {
               startIcon={button.icon}
               fullWidth
               sx={{ textTransform: 'none' }}
+              onClick={() => handleButtonClick(button.name)}
             >
               {button.name}
             </Button>
