@@ -4,7 +4,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ResponsiveAppBar from './ResponsiveAppBar';
 import Footer from './components/Footer';
-import Home from './pages/Home';
+
 
 import RecipeReviewCard from './RecipeReviewCard';
 import IconLabelGrid from './IconLabelGrid';
@@ -27,7 +27,7 @@ function App() {
             <Route path="/" 
             element={
               <>
-            <Home />
+           
             <IconLabelGrid />
         <RecipeReviewCard />
         </>
