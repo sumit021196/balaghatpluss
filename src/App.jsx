@@ -5,7 +5,7 @@ import ResponsiveAppBar from './ResponsiveAppBar';
 import Footer from './components/Footer';
 import SearchBar from "./SearchBar";
 
-import RecipeReviewCard from './RecipeReviewCard';
+import SelectActionCard from './RecipeReviewCard';
 import IconLabelGrid from './IconLabelGrid';
 import LabelBottomNavigation from './LabelBottomNavigation';
 import CategoryDetailPage from './CategoryDetailPage';
@@ -33,7 +33,7 @@ function App() {
               element={
                 <>
                   <IconLabelGrid />
-                  <RecipeReviewCard />
+                  <SelectActionCard />
                 </>
               }
             />

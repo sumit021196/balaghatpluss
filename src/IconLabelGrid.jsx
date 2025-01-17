@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import Box from '@mui/material/Box';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
