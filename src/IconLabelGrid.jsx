@@ -15,7 +15,7 @@ const buttons = [
   { id: 2, name: 'Food', icon: <FastfoodIcon /> },
   { id: 3, name: 'Grocery', icon: <ShoppingCartIcon /> },
   { id: 4, name: 'Property', icon: <ApartmentIcon /> },
-  { id: 5, name: 'Local Mistry', icon: <EngineeringIcon /> },
+  { id: 5, name: 'Mistry', icon: <EngineeringIcon /> },
   { id: 6, name: 'Transport', icon: <DirectionsBikeIcon /> },
 ];
 
