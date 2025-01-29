@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
@@ -30,14 +30,20 @@ export default function IconLabelGrid() {
 
   return (
     <Box sx={{ flexGrow: 1, padding: 2 }}>
-      <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
+      <Grid container spacing={2} justifyContent="center">
         {buttons.map((button) => (
-          <Grid item xs={2} sm={4} md={4} key={button.id}>
+          <Grid item xs={6} sm={4} md={3} key={button.id}>
             <Button
               variant="outlined"
               startIcon={button.icon}
               fullWidth
-              sx={{ textTransform: 'none' }}
+              sx={{
+                textTransform: 'none',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '50px', // Ensures all buttons have the same height
+              }}
               onClick={() => handleButtonClick(button.name)}
             >
               {button.name}
