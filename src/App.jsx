@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ResponsiveAppBar from './ResponsiveAppBar';
 import Footer from './components/Footer';
 import SearchBar from "./SearchBar";
-
+import BlogPage from './BlogPage'; 
 import SelectActionCard from './RecipeReviewCard';
 import IconLabelGrid from './IconLabelGrid';
 import LabelBottomNavigation from './LabelBottomNavigation';
@@ -38,6 +38,7 @@ function App() {
               }
             />
             <Route path="/category/:categoryName" element={<CategoryDetailPage />} />
+            <Route path="/blog" element={<BlogPage />} />
           </Routes>
         </div>
 
