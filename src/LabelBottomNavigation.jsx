@@ -16,24 +16,40 @@ export default function LabelBottomNavigation() {
 
   return (
     <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-    <BottomNavigation sx={{ width: 500 }} value={value} onChange={handleChange}>
-      <BottomNavigationAction
-        label="Recents"
-        value="recents"
-        icon={<RestoreIcon />}
-      />
-      <BottomNavigationAction
-        label="Favorites"
-        value="favorites"
-        icon={<FavoriteIcon />}
-      />
-      <BottomNavigationAction
-        label="Nearby"
-        value="nearby"
-        icon={<LocationOnIcon />}
-      />
-      <BottomNavigationAction label="Folder" value="folder" icon={<FolderIcon />} />
-    </BottomNavigation>
+      <BottomNavigation
+        sx={{
+          width: "100%",  // Full width to fit mobile screens
+          maxWidth: 400,  // Limits max width on larger screens
+          margin: "auto", // Centers it
+        }}
+        value={value}
+        onChange={handleChange}
+      >
+        <BottomNavigationAction
+          label="Recents"
+          value="recents"
+          icon={<RestoreIcon />}
+          sx={{ minWidth: "auto" }} // Reduces individual button width
+        />
+        <BottomNavigationAction
+          label="Favorites"
+          value="favorites"
+          icon={<FavoriteIcon />}
+          sx={{ minWidth: "auto" }}
+        />
+        <BottomNavigationAction
+          label="Nearby"
+          value="nearby"
+          icon={<LocationOnIcon />}
+          sx={{ minWidth: "auto" }}
+        />
+        <BottomNavigationAction
+          label="Folder"
+          value="folder"
+          icon={<FolderIcon />}
+          sx={{ minWidth: "auto" }}
+        />
+      </BottomNavigation>
     </Paper>
   );
 }
