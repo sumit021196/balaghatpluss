@@ -8,6 +8,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
+import ArticleIcon from '@mui/icons-material/Article';
 import { useNavigate } from 'react-router-dom';
 
 const buttons = [
@@ -17,13 +18,14 @@ const buttons = [
   { id: 4, name: 'Property', icon: <ApartmentIcon /> },
   { id: 5, name: 'Mistry', icon: <EngineeringIcon /> },
   { id: 6, name: 'Transport', icon: <DirectionsBikeIcon /> },
+  { id: 7, name: 'Blog', icon: <ArticleIcon /> },
 ];
 
 export default function IconLabelGrid() {
   const navigate = useNavigate();
 
   const handleButtonClick = (name) => {
-    navigate(`/category/${name}`);
+    navigate(name === 'Blog' ? '/blog' : `/category/${name}`);
   };
 
   return (
