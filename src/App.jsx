@@ -9,7 +9,7 @@ import SelectActionCard from './RecipeReviewCard';
 import IconLabelGrid from './IconLabelGrid';
 import LabelBottomNavigation from './LabelBottomNavigation';
 import CategoryDetailPage from './CategoryDetailPage';
-
+import AddBlog from './AddBlog'
 function App() {
   const handleSearch = (query) => {
     console.log("Search query:", query);
@@ -39,6 +39,7 @@ function App() {
             />
             <Route path="/category/:categoryName" element={<CategoryDetailPage />} />
             <Route path="/blog" element={<BlogPage />} />
+            <Route path="/add-blog" element={<AddBlog />} />
           </Routes>
         </div>
 
