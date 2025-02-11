@@ -1,6 +1,6 @@
 // src/BlogPage.js
 import React, { useEffect, useState } from "react";
-import { db } from "./firebaseConfig";
+import { db } from "./FirebaseConfig.jsx";
 import { collection, getDocs } from "firebase/firestore";
 
 const BlogPage = () => {
