@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
@@ -9,6 +8,8 @@ import EngineeringIcon from '@mui/icons-material/Engineering';
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import ArticleIcon from '@mui/icons-material/Article';
+import SchoolIcon from '@mui/icons-material/School';
+import BuildIcon from '@mui/icons-material/Build';
 import { useNavigate } from 'react-router-dom';
 
 const buttons = [
@@ -19,38 +20,55 @@ const buttons = [
   { id: 5, name: 'Mistry', icon: <EngineeringIcon /> },
   { id: 6, name: 'Transport', icon: <DirectionsBikeIcon /> },
   { id: 7, name: 'Blog', icon: <ArticleIcon /> },
+  { id: 8, name: 'Education', icon: <SchoolIcon /> },
+  { id: 9, name: 'Repair Services', icon: <BuildIcon /> },
 ];
 
 export default function IconLabelGrid() {
   const navigate = useNavigate();
 
-  const handleButtonClick = (name) => {
-    navigate(name === 'Blog' ? '/blog' : `/category/${name}`);
-  };
+  const handleButtonClick = React.useCallback((name) => {
+    navigate(name === 'Blog' ? '/blog' : `/category/${name.toLowerCase()}`);
+  }, [navigate]);
 
   return (
-    <Box sx={{ flexGrow: 1, padding: 2 }}>
-      <Grid container spacing={2} justifyContent="center">
-        {buttons.map((button) => (
-          <Grid item xs={6} sm={4} md={3} key={button.id}>
-            <Button
-              variant="outlined"
-              startIcon={button.icon}
-              fullWidth
-              sx={{
-                textTransform: 'none',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '50px', // Ensures all buttons have the same height
-              }}
-              onClick={() => handleButtonClick(button.name)}
-            >
-              {button.name}
-            </Button>
-          </Grid>
-        ))}
-      </Grid>
+    <Box
+      sx={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        gap: 2,
+        padding: 2,
+      }}
+    >
+      {buttons.map((button) => (
+        <Box
+          key={button.id}
+          sx={{
+            width: { xs: '30%', sm: '30%', md: '20%' },
+            minWidth: '100px',
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <Button
+            variant="outlined"
+            startIcon={button.icon}
+            sx={{
+              textTransform: 'none',
+              width: '100%',
+              height: '70px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            onClick={() => handleButtonClick(button.name)}
+          >
+            {button.name}
+          </Button>
+        </Box>
+      ))}
     </Box>
   );
 }
