@@ -1,52 +1,54 @@
 import React from 'react';
-import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import ResponsiveAppBar from './ResponsiveAppBar';
-import Footer from './components/Footer';
-import SearchBar from "./SearchBar";
-import BlogPage from './BlogPage'; 
-import SelectActionCard from './RecipeReviewCard';
-import IconLabelGrid from './IconLabelGrid';
 import LabelBottomNavigation from './LabelBottomNavigation';
-import CategoryDetailPage from './CategoryDetailPage';
+import Home from './pages/Home';
+import CategoryPage from './pages/CategoryPage';
+import BusinessDetails from './pages/BusinessDetails';
+
+// Create a theme instance
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1976d2',
+      light: '#42a5f5',
+    },
+    secondary: {
+      main: '#ff4081',
+    },
+  },
+  typography: {
+    fontFamily: [
+      'Roboto',
+      'Arial',
+      'sans-serif'
+    ].join(','),
+  },
+});
 
 function App() {
-  const handleSearch = (query) => {
-    console.log("Search query:", query);
-    // Add logic for handling search results, e.g., filtering or API calls
-  };
-
   return (
-    <Router>
-      <div className="App">
-        <ResponsiveAppBar />
-        <div style={{ padding: '20px' }}>
-          {/* Search Bar */}
-          <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
-            <SearchBar onSearch={handleSearch} />
-          </div>
-
-          {/* Routes */}
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Router>
+        <div style={{ paddingBottom: '56px' }}> {/* Space for bottom navigation */}
+          <ResponsiveAppBar />
           <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <IconLabelGrid />
-                  <SelectActionCard />
-                </>
-              }
-            />
-            <Route path="/category/:categoryName" element={<CategoryDetailPage />} />
-            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/category/:id" element={<CategoryPage />} />
+            <Route path="/business/:id" element={<BusinessDetails />} />
+            <Route path="/leads" element={<div>Leads Page</div>} />
+            <Route path="/b2b" element={<div>B2B Page</div>} />
+            <Route path="/pay" element={<div>Payment Page</div>} />
+            <Route path="/news" element={<div>News Page</div>} />
+            <Route path="/more" element={<div>More Options</div>} />
           </Routes>
+          <LabelBottomNavigation />
         </div>
-
-        {/* Footer and Bottom Navigation */}
-        <Footer />
-        <LabelBottomNavigation />
-      </div>
-    </Router>
+      </Router>
+    </ThemeProvider>
   );
 }
 

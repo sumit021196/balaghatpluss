@@ -1,55 +1,75 @@
-import * as React from 'react';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import FolderIcon from '@mui/icons-material/Folder';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import Paper from '@mui/material/Paper';
+import React, { useState } from 'react';
+import { Paper, BottomNavigation, BottomNavigationAction } from '@mui/material';
+import {
+  Home,
+  Message,
+  Business,
+  Payment,
+  Newspaper,
+  Menu
+} from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
-export default function LabelBottomNavigation() {
-  const [value, setValue] = React.useState('recents');
+const LabelBottomNavigation = () => {
+  const [value, setValue] = useState('home');
+  const navigate = useNavigate();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    navigate(`/${newValue}`);
   };
 
   return (
-    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+    <Paper 
+      sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} 
+      elevation={3}
+    >
       <BottomNavigation
-        sx={{
-          width: "100%",  // Full width to fit mobile screens
-          maxWidth: 400,  // Limits max width on larger screens
-          margin: "auto", // Centers it
-        }}
         value={value}
         onChange={handleChange}
+        sx={{
+          '& .MuiBottomNavigationAction-root': {
+            minWidth: 'auto',
+            padding: '6px 0',
+          },
+          '& .MuiBottomNavigationAction-label': {
+            fontSize: '0.7rem',
+          },
+        }}
       >
         <BottomNavigationAction
-          label="Recents"
-          value="recents"
-          icon={<RestoreIcon />}
-          sx={{ minWidth: "auto" }} // Reduces individual button width
+          label="Home"
+          value="home"
+          icon={<Home />}
         />
         <BottomNavigationAction
-          label="Favorites"
-          value="favorites"
-          icon={<FavoriteIcon />}
-          sx={{ minWidth: "auto" }}
+          label="Leads"
+          value="leads"
+          icon={<Message />}
         />
         <BottomNavigationAction
-          label="Nearby"
-          value="nearby"
-          icon={<LocationOnIcon />}
-          sx={{ minWidth: "auto" }}
+          label="B2B"
+          value="b2b"
+          icon={<Business />}
         />
         <BottomNavigationAction
-          label="Folder"
-          value="folder"
-          icon={<FolderIcon />}
-          sx={{ minWidth: "auto" }}
+          label="Pay"
+          value="pay"
+          icon={<Payment />}
+        />
+        <BottomNavigationAction
+          label="News"
+          value="news"
+          icon={<Newspaper />}
+        />
+        <BottomNavigationAction
+          label="More"
+          value="more"
+          icon={<Menu />}
         />
       </BottomNavigation>
     </Paper>
   );
-}
+};
+
+export default LabelBottomNavigation;
