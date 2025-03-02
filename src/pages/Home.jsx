@@ -215,7 +215,7 @@ const Home = () => {
             Connect with
           </Typography>
           <Typography variant="h4" sx={{ color: '#0277bd', fontWeight: 'bold', mb: 1 }}>
-            18.1 Crore+
+            1 Lakh+
           </Typography>
           <Typography variant="subtitle1" sx={{ color: '#0277bd', mb: 2 }}>
             Customers on BalaghatPlus
