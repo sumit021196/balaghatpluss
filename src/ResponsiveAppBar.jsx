@@ -6,12 +6,18 @@ import { styled } from '@mui/material/styles';
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: '#fff',
   boxShadow: 'none',
-  borderBottom: '1px solid #eee',
+  borderBottom: '1px solid #e0e0e0',
+  '& .MuiToolbar-root': {
+    minHeight: '56px',
+    padding: '0 16px',
+  },
 }));
 
 const Logo = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
   '& img': {
-    height: '30px',
+    height: '24px',
   },
 });
 
@@ -19,12 +25,26 @@ const AdvertiseButton = styled(Button)(({ theme }) => ({
   border: '1px solid #1976d2',
   color: '#1976d2',
   borderRadius: '20px',
-  padding: '4px 15px',
+  padding: '4px 16px',
   textTransform: 'none',
   fontSize: '14px',
   marginLeft: 'auto',
-  marginRight: '10px',
+  marginRight: '12px',
+  fontWeight: 500,
+  '&:hover': {
+    backgroundColor: 'rgba(25, 118, 210, 0.04)',
+    border: '1px solid #1976d2',
+  },
 }));
+
+const IconContainer = styled(Box)({
+  display: 'flex',
+  gap: '4px',
+  '& .MuiIconButton-root': {
+    padding: '8px',
+    color: '#5f6368',
+  },
+});
 
 const ResponsiveAppBar = () => {
   return (
@@ -32,27 +52,21 @@ const ResponsiveAppBar = () => {
       <Toolbar>
         <Logo>
           <img 
-            src="/balaghatplus-logo.png" 
-            alt="BalaghatPlus" 
-            style={{ 
-              height: '30px',
-              color: '#1976d2',
-              fontWeight: 'bold',
-              fontSize: '24px',
-            }}
+            src="/balaghatplus-logo.svg" 
+            alt="BalaghatPlus"
           />
         </Logo>
         <AdvertiseButton variant="outlined">
           Advertise
         </AdvertiseButton>
-        <Box>
+        <IconContainer>
           <IconButton>
             <NotificationsNone />
           </IconButton>
           <IconButton>
             <AccountCircle />
           </IconButton>
-        </Box>
+        </IconContainer>
       </Toolbar>
     </StyledAppBar>
   );

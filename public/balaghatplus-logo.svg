@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="200" height="40" viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg">
-  <text x="10" y="30" font-family="Arial" font-size="24" font-weight="bold">
+<svg width="160" height="32" viewBox="0 0 160 32" xmlns="http://www.w3.org/2000/svg">
+  <text x="0" y="24" font-family="Arial" font-size="24" font-weight="bold" letter-spacing="-0.5">
     <tspan fill="#1976d2">Balaghat</tspan>
-    <tspan fill="#ff4081">Plus</tspan>
+    <tspan fill="#1976d2">Plus</tspan>
   </text>
 </svg> 

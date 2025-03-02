@@ -1,79 +1,97 @@
 import React from 'react';
-import { Grid, Typography, Paper, Box, Container, Button } from '@mui/material';
+import { Grid, Typography, Box, Container, Button, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import SearchBar from '../SearchBar';
-import {
-  LocalHospital,
-  Flight,
-  DirectionsCar,
-  Spa,
-  People,
-  FitnessCenter,
-  School,
-  LocalShipping,
-  Build,
-  Store,
-  Work,
-  AccountBalance,
-  Home as HomeIcon,
-  Hotel,
-  ExpandMore,
-  ShoppingCart,
-  Checkroom,
-  Face
-} from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
-const ServiceItem = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(2),
+const ServiceItem = styled(Box)(({ theme }) => ({
   textAlign: 'center',
   color: '#666',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   cursor: 'pointer',
-  boxShadow: 'none',
+  padding: theme.spacing(2),
   '&:hover': {
-    backgroundColor: theme.palette.grey[100],
+    backgroundColor: 'rgba(0, 0, 0, 0.04)',
   },
 }));
 
-const IconWrapper = styled('div')(({ theme }) => ({
+const IconWrapper = styled('div')({
   width: '48px',
   height: '48px',
-  borderRadius: '50%',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  marginBottom: theme.spacing(1),
+  marginBottom: '8px',
   '& svg': {
-    fontSize: '24px',
-    color: theme.palette.primary.main,
+    width: '100%',
+    height: '100%',
+    color: '#1976d2',
   },
-}));
+});
 
 const services = [
-  { icon: <Store />, title: 'B2B', path: '/b2b', color: '#ff9800' },
-  { icon: <LocalHospital />, title: 'Doctors', path: '/doctors' },
-  { icon: <Flight />, title: 'Travel', path: '/travel' },
-  { icon: <DirectionsCar />, title: 'Car Hire', path: '/car-hire' },
-  { icon: <Spa />, title: 'Beauty', path: '/beauty' },
-  { icon: <People />, title: 'Wedding Planning', path: '/wedding' },
-  { icon: <FitnessCenter />, title: 'Gyms', path: '/gyms' },
-  { icon: <School />, title: 'Education', path: '/education' },
-  { icon: <LocalShipping />, title: 'Packers & Movers', path: '/movers' },
-  { icon: <Build />, title: 'Repairs & Services', path: '/repairs' },
-  { icon: <Store />, title: 'Rent or Hire', path: '/rent' },
-  { icon: <Work />, title: 'Jobs', path: '/jobs' },
-  { icon: <AccountBalance />, title: 'Loans', path: '/loans' },
-  { icon: <HomeIcon />, title: 'Real Estate', path: '/real-estate' },
-  { icon: <Hotel />, title: 'PG/Hostel', path: '/hostel' },
-];
-
-const promotionalApps = [
-  { icon: <ShoppingCart />, title: 'JioMart\nSHOPPING', color: '#0277bd' },
-  { icon: <Checkroom />, title: 'AJIO\nFASHION', color: '#263238' },
-  { icon: <Face />, title: 'tira\nBEAUTY', color: '#ffcdd2' },
+  {
+    icon: '/icons/b2b.svg',
+    title: 'B2B',
+    path: '/b2b'
+  },
+  {
+    icon: '/icons/doctor.svg',
+    title: 'Doctors',
+    path: '/doctors'
+  },
+  {
+    icon: '/icons/travel.svg',
+    title: 'Travel',
+    path: '/travel'
+  },
+  {
+    icon: '/icons/car.svg',
+    title: 'Car\nHire',
+    path: '/car-hire'
+  },
+  {
+    icon: '/icons/beauty.svg',
+    title: 'Beauty',
+    path: '/beauty'
+  },
+  {
+    icon: '/icons/wedding.svg',
+    title: 'Wedding\nPlanning',
+    path: '/wedding'
+  },
+  {
+    icon: '/icons/gym.svg',
+    title: 'Gyms',
+    path: '/gyms'
+  },
+  {
+    icon: '/icons/education.svg',
+    title: 'Education',
+    path: '/education'
+  },
+  {
+    icon: '/icons/movers.svg',
+    title: 'Packers\n&\nMovers',
+    path: '/movers'
+  },
+  {
+    icon: '/icons/repair.svg',
+    title: 'Repairs\n&\nServices',
+    path: '/repairs'
+  },
+  {
+    icon: '/icons/rent.svg',
+    title: 'Rent\nor\nHire',
+    path: '/rent'
+  },
+  {
+    icon: '/icons/jobs.svg',
+    title: 'Jobs',
+    path: '/jobs'
+  }
 ];
 
 const Home = () => {
@@ -82,118 +100,34 @@ const Home = () => {
   return (
     <Container maxWidth="md" sx={{ pb: 8 }}>
       <Box sx={{ mt: 2, mb: 4 }}>
-        <Box sx={{ mb: 3 }}>
+        <Box sx={{ mb: 3, px: 2 }}>
           <SearchBar />
         </Box>
-        <Grid container spacing={3}>
+        <Grid container>
           {services.map((service, index) => (
             <Grid item xs={3} key={index}>
               <ServiceItem onClick={() => navigate(service.path)}>
                 <IconWrapper>
-                  {service.icon}
+                  <img 
+                    src={service.icon} 
+                    alt={service.title}
+                    style={{ width: '100%', height: '100%' }}
+                  />
                 </IconWrapper>
                 <Typography 
                   variant="caption" 
+                  component="div"
                   sx={{ 
-                    fontSize: '12px',
+                    fontSize: '13px',
                     lineHeight: 1.2,
-                    fontWeight: 500,
+                    color: '#555',
+                    whiteSpace: 'pre-line',
                     textAlign: 'center',
                   }}
                 >
                   {service.title}
                 </Typography>
               </ServiceItem>
-            </Grid>
-          ))}
-          <Grid item xs={3}>
-            <ServiceItem>
-              <IconWrapper>
-                <ExpandMore />
-              </IconWrapper>
-              <Typography 
-                variant="caption"
-                sx={{ 
-                  fontSize: '12px',
-                  lineHeight: 1.2,
-                  fontWeight: 500 
-                }}
-              >
-                Show More
-              </Typography>
-            </ServiceItem>
-          </Grid>
-        </Grid>
-
-        <Box 
-          sx={{ 
-            mt: 4, 
-            p: 3, 
-            bgcolor: '#e3f2fd', 
-            borderRadius: 2,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 3
-          }}
-        >
-          <Box sx={{ flex: 1 }}>
-            <Typography variant="h5" sx={{ color: '#0277bd', fontWeight: 'bold', mb: 1 }}>
-              Connect with
-            </Typography>
-            <Typography variant="h4" sx={{ color: '#0277bd', fontWeight: 'bold', mb: 1 }}>
-              18.1 Crore+
-            </Typography>
-            <Typography variant="subtitle1" sx={{ color: '#0277bd', mb: 2 }}>
-              Customers on BalaghatPlus
-            </Typography>
-            <Button 
-              variant="contained" 
-              sx={{ 
-                bgcolor: '#1976d2',
-                '&:hover': { bgcolor: '#1565c0' },
-                borderRadius: '4px',
-                textTransform: 'none',
-              }}
-            >
-              List your business for FREE
-            </Button>
-          </Box>
-          <Box 
-            component="img"
-            src="/business-man.png"
-            alt="Business Man"
-            sx={{ 
-              width: '150px',
-              height: 'auto',
-              display: { xs: 'none', sm: 'block' }
-            }}
-          />
-        </Box>
-
-        <Grid container spacing={2} sx={{ mt: 4 }}>
-          {promotionalApps.map((app, index) => (
-            <Grid item xs={4} key={index}>
-              <Paper 
-                sx={{ 
-                  p: 2, 
-                  bgcolor: app.color,
-                  color: 'white',
-                  textAlign: 'center',
-                  borderRadius: 2
-                }}
-              >
-                {app.icon}
-                <Typography 
-                  variant="caption" 
-                  sx={{ 
-                    display: 'block',
-                    mt: 1,
-                    whiteSpace: 'pre-line'
-                  }}
-                >
-                  {app.title}
-                </Typography>
-              </Paper>
             </Grid>
           ))}
         </Grid>

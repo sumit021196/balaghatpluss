@@ -8,10 +8,12 @@ const SearchPaper = styled(Paper)(({ theme }) => ({
   alignItems: 'center',
   width: '100%',
   border: '1px solid #ddd',
-  borderRadius: '25px',
-  padding: '2px 4px',
+  borderRadius: '30px',
+  padding: '4px 8px',
+  backgroundColor: '#f8f9fa',
   boxShadow: 'none',
   '&:hover': {
+    backgroundColor: '#fff',
     boxShadow: '0 1px 6px rgba(32,33,36,0.28)',
   },
 }));
@@ -22,17 +24,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
     padding: '8px 0',
     fontSize: '16px',
+    color: '#5f6368',
     '&::placeholder': {
-      color: '#666',
+      color: '#5f6368',
       opacity: 1,
     },
   },
 }));
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
-  padding: '10px',
+  padding: '8px',
+  color: '#5f6368',
   '& svg': {
-    fontSize: '20px',
+    fontSize: '24px',
   },
 }));
 
@@ -46,12 +50,12 @@ const SearchBar = () => {
   };
 
   return (
-    <SearchPaper component="form" onSubmit={handleSearch}>
+    <SearchPaper component="form" onSubmit={handleSearch} elevation={0}>
       <StyledIconButton aria-label="search">
-        <Search sx={{ color: '#666' }} />
+        <Search />
       </StyledIconButton>
       <StyledInputBase
-        placeholder="Search for services in Balaghat..."
+        placeholder="Search for services in Balagha"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />

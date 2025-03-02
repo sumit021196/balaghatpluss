@@ -28,12 +28,39 @@ const LabelBottomNavigation = () => {
         value={value}
         onChange={handleChange}
         sx={{
+          bgcolor: '#ffffff',
           '& .MuiBottomNavigationAction-root': {
             minWidth: 'auto',
             padding: '6px 0',
+            color: '#757575',
+            '&.Mui-selected': {
+              color: '#1976d2',
+              '& .MuiBottomNavigationAction-label': {
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                lineHeight: '1',
+                color: '#1976d2',
+                transform: 'none',
+                visibility: 'visible',
+                opacity: 1,
+              },
+              '& .MuiSvgIcon-root': {
+                color: '#1976d2',
+              },
+            },
+            '& .MuiBottomNavigationAction-label': {
+              fontSize: '0.75rem',
+              lineHeight: '1',
+              transform: 'none',
+              visibility: 'visible',
+              opacity: 1,
+              transition: 'none',
+            },
           },
-          '& .MuiBottomNavigationAction-label': {
-            fontSize: '0.7rem',
+          '& .MuiSvgIcon-root': {
+            color: '#757575',
+            fontSize: '1.5rem',
+            marginBottom: '2px',
           },
         }}
       >
