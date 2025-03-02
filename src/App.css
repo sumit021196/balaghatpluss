@@ -1,0 +1,324 @@
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fff;
+}
+
+/* Navbar Styles */
+.navbar {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem; /* Space between elements in the navbar */
+  text-align: center;
+}
+
+.navbar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.brand-name a {
+  color: #fff;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.brand-name a:hover,
+.brand-name a:focus {
+  color: #ddd;
+  text-decoration: underline;
+}
+
+.search-bar {
+  position: relative;
+  width: 100%;
+  max-width: 300px; /* Limit the maximum width */
+}
+
+.search-bar input {
+  width: 100%; /* Full width of the parent container */
+  max-width: 100%; /* Prevent overflow */
+  padding: 0.5rem 2rem 0.5rem 0.75rem;
+  border-radius: 2rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  box-sizing: border-box; /* Ensure padding doesn't exceed width */
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .search-bar {
+    max-width: 80%; /* Shrinks the search bar width to 80% of the screen */
+  }
+
+  .search-bar input {
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
+    padding: 0.4rem 1.8rem 0.4rem 0.6rem; /* Adjust padding */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .search-bar {
+    max-width: 90%; /* Further shrink for very small screens */
+  }
+
+  .search-bar input {
+    font-size: 0.8rem; /* Smaller font size for compact layout */
+    padding: 0.3rem 1.5rem 0.3rem 0.5rem; /* Adjust padding */
+  }
+}
+
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #888;
+  pointer-events: none;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+  height: 2rem;
+  width: 2rem;
+}
+
+.hamburger .bar {
+  width: 1.5rem;
+  height: 0.25rem;
+  background-color: #fff;
+}
+
+/* Menu */
+.menu {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.menu.active {
+  display: flex;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.menu ul li {
+  width: 100%;
+}
+
+.menu ul li a {
+  display: block;
+  padding: 0.5rem;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.menu ul li a:hover,
+.menu ul li a:focus {
+  background-color: #444;
+}
+
+/* Home Section */
+/* Home Component Styles */
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  gap: 1rem;
+  width: 100%;
+  max-width: 500px; /* Restrict maximum width for better readability */
+  margin: 0 auto; /* Center horizontally */
+}
+
+.home h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.home p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.home ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* Space between list items */
+}
+
+.home ul li {
+  font-size: 1rem;
+  color: #444;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  max-width: 300px; /* Limit the width of list items */
+  margin: 0 auto; /* Center list items */
+  text-align: center;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.home ul li:hover {
+  background-color: #eaeaea; /* Subtle hover effect */
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .home {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  .home h1 {
+    font-size: 1.75rem; /* Adjusted font size */
+  }
+
+  .home p {
+    font-size: 0.9rem; /* Smaller text for smaller screens */
+  }
+
+  .home ul li {
+    font-size: 0.9rem; /* Adjust font size of list items */
+    padding: 0.4rem 0.8rem; /* Reduce padding for smaller screens */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .home {
+    padding: 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .home h1 {
+    font-size: 1.5rem; /* Further reduce font size */
+  }
+
+  .home p {
+    font-size: 0.8rem; /* Adjust paragraph font size */
+  }
+
+  .home ul li {
+    font-size: 0.8rem; /* Adjust list item font size */
+    padding: 0.3rem 0.7rem; /* Compact padding */
+  }
+}
+
+
+/* Responsive Styles for Small Screens */
+@media screen and (max-width: 768px) {
+  .navbar {
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .menu ul li {
+    text-align: center;
+  }
+
+
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Search bar styles */
+.search-container {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/* Grid item hover effect */
+.grid-item:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Bottom navigation styles */
+.bottom-nav {
+  border-top: 1px solid #eee;
+}
+
+.bottom-nav .MuiBottomNavigationAction-root {
+  min-width: auto;
+  padding: 6px 0;
+  color: #666;
+}
+
+.bottom-nav .Mui-selected {
+  color: #1a73e8;
+}
+
+/* Advertisement banner styles */
+.ad-banner {
+  background-color: #f0f7ff;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px;
+  text-align: center;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .search-container {
+    padding: 10px 15px;
+  }
+  
+  .ad-banner {
+    margin: 10px;
+    padding: 15px;
+  }
+}
