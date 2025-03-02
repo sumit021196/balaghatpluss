@@ -1,15 +1,15 @@
 import React from 'react';
-import { Grid, Typography, Box, Container } from '@mui/material';
+import { Grid, Typography, Box, Container, Button, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import SearchBar from '../SearchBar';
 import { useNavigate } from 'react-router-dom';
 import { BiBuildingHouse, BiDumbbell } from 'react-icons/bi';
-import { FaUserDoctor, FaCarSide, FaGraduationCap } from 'react-icons/fa6';
-import { MdTravelExplore, MdHomeRepairService } from 'react-icons/md';
+import { FaUserDoctor, FaCarSide, FaGraduationCap, FaMoneyBillWave } from 'react-icons/fa6';
+import { MdTravelExplore, MdHomeRepairService, MdExpandMore } from 'react-icons/md';
 import { GiLipstick } from 'react-icons/gi';
-import { RiHandHeartLine } from 'react-icons/ri';
+import { RiHandHeartLine, RiHomeHeartFill } from 'react-icons/ri';
 import { TbTruckDelivery } from 'react-icons/tb';
-import { BsHouses } from 'react-icons/bs';
+import { BsHouses, BsBuildingsFill } from 'react-icons/bs';
 import { MdWorkOutline } from 'react-icons/md';
 
 const ServiceItem = styled(Box)(({ theme }) => ({
@@ -19,7 +19,7 @@ const ServiceItem = styled(Box)(({ theme }) => ({
   flexDirection: 'column',
   alignItems: 'center',
   cursor: 'pointer',
-  padding: theme.spacing(2),
+  padding: theme.spacing(1),
   '&:hover': {
     backgroundColor: 'rgba(0, 0, 0, 0.04)',
     '& .service-icon': {
@@ -29,12 +29,12 @@ const ServiceItem = styled(Box)(({ theme }) => ({
 }));
 
 const IconWrapper = styled('div')({
-  width: '48px',
-  height: '48px',
+  width: '36px',
+  height: '36px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  marginBottom: '8px',
+  marginBottom: '4px',
   '& svg': {
     width: '100%',
     height: '100%',
@@ -44,6 +44,27 @@ const IconWrapper = styled('div')({
     transition: 'transform 0.2s ease-in-out',
   }
 });
+
+const PromotionalCard = styled(Paper)(({ theme }) => ({
+  padding: theme.spacing(3),
+  backgroundColor: '#e3f2fd',
+  borderRadius: theme.spacing(2),
+  marginTop: theme.spacing(4),
+  textAlign: 'center',
+}));
+
+const AppCard = styled(Paper)(({ bgcolor }) => ({
+  padding: '16px',
+  backgroundColor: bgcolor,
+  borderRadius: '8px',
+  color: 'white',
+  textAlign: 'center',
+  cursor: 'pointer',
+  transition: 'transform 0.2s ease-in-out',
+  '&:hover': {
+    transform: 'translateY(-4px)',
+  },
+}));
 
 const services = [
   {
@@ -105,11 +126,36 @@ const services = [
     icon: <MdWorkOutline className="service-icon" style={{ color: '#27AE60' }} />,
     title: 'Jobs',
     path: '/jobs'
+  },
+  {
+    icon: <FaMoneyBillWave className="service-icon" style={{ color: '#2980B9' }} />,
+    title: 'Loans',
+    path: '/loans'
+  },
+  {
+    icon: <RiHomeHeartFill className="service-icon" style={{ color: '#C0392B' }} />,
+    title: 'Real\nEstate',
+    path: '/real-estate'
+  },
+  {
+    icon: <BsBuildingsFill className="service-icon" style={{ color: '#8E44AD' }} />,
+    title: 'PG/Hostel',
+    path: '/pg-hostel'
   }
+];
+
+const promotionalApps = [
+  { title: 'JioMart\nSHOPPING', bgcolor: '#0277bd' },
+  { title: 'AJIO\nFASHION', bgcolor: '#263238' },
+  { title: 'tira\nBEAUTY', bgcolor: '#ffcdd2' },
+  { title: 'PAY\nBILLS', bgcolor: '#1565c0' }
 ];
 
 const Home = () => {
   const navigate = useNavigate();
+  const [showAllServices, setShowAllServices] = React.useState(false);
+
+  const displayedServices = showAllServices ? services : services.slice(0, 12);
 
   return (
     <Container maxWidth="md" sx={{ pb: 8 }}>
@@ -117,8 +163,8 @@ const Home = () => {
         <Box sx={{ mb: 3, px: 2 }}>
           <SearchBar />
         </Box>
-        <Grid container>
-          {services.map((service, index) => (
+        <Grid container spacing={1}>
+          {displayedServices.map((service, index) => (
             <Grid item xs={3} key={index}>
               <ServiceItem onClick={() => navigate(service.path)}>
                 <IconWrapper>
@@ -128,8 +174,8 @@ const Home = () => {
                   variant="caption" 
                   component="div"
                   sx={{ 
-                    fontSize: '13px',
-                    lineHeight: 1.2,
+                    fontSize: '11px',
+                    lineHeight: 1.1,
                     color: '#555',
                     whiteSpace: 'pre-line',
                     textAlign: 'center',
@@ -138,6 +184,71 @@ const Home = () => {
                   {service.title}
                 </Typography>
               </ServiceItem>
+            </Grid>
+          ))}
+          {!showAllServices && (
+            <Grid item xs={3}>
+              <ServiceItem onClick={() => setShowAllServices(true)}>
+                <IconWrapper>
+                  <MdExpandMore className="service-icon" style={{ color: '#1976d2' }} />
+                </IconWrapper>
+                <Typography 
+                  variant="caption" 
+                  component="div"
+                  sx={{ 
+                    fontSize: '11px',
+                    lineHeight: 1.1,
+                    color: '#555',
+                    whiteSpace: 'pre-line',
+                    textAlign: 'center',
+                  }}
+                >
+                  Show More
+                </Typography>
+              </ServiceItem>
+            </Grid>
+          )}
+        </Grid>
+
+        <PromotionalCard>
+          <Typography variant="h5" sx={{ color: '#0277bd', fontWeight: 'bold', mb: 1 }}>
+            Connect with
+          </Typography>
+          <Typography variant="h4" sx={{ color: '#0277bd', fontWeight: 'bold', mb: 1 }}>
+            18.1 Crore+
+          </Typography>
+          <Typography variant="subtitle1" sx={{ color: '#0277bd', mb: 2 }}>
+            Customers on BalaghatPlus
+          </Typography>
+          <Button 
+            variant="contained" 
+            sx={{ 
+              bgcolor: '#1976d2',
+              '&:hover': { bgcolor: '#1565c0' },
+              borderRadius: '4px',
+              textTransform: 'none',
+              px: 4,
+            }}
+          >
+            List your business for FREE
+          </Button>
+        </PromotionalCard>
+
+        <Grid container spacing={2} sx={{ mt: 4 }}>
+          {promotionalApps.map((app, index) => (
+            <Grid item xs={3} key={index}>
+              <AppCard bgcolor={app.bgcolor}>
+                <Typography 
+                  variant="caption" 
+                  sx={{ 
+                    display: 'block',
+                    whiteSpace: 'pre-line',
+                    fontWeight: 500
+                  }}
+                >
+                  {app.title}
+                </Typography>
+              </AppCard>
             </Grid>
           ))}
         </Grid>
