@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import { Paper, BottomNavigation, BottomNavigationAction } from '@mui/material';
-import {
-  Home,
-  Message,
-  Business,
-  Payment,
-  Newspaper,
-  Menu
-} from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { AiOutlineHome, AiOutlineMessage } from 'react-icons/ai';
+import { BiBuildingHouse } from 'react-icons/bi';
+import { BsCreditCard2Back } from 'react-icons/bs';
+import { HiOutlineNewspaper } from 'react-icons/hi';
+import { CgMenuGridO } from 'react-icons/cg';
 
 const LabelBottomNavigation = () => {
   const [value, setValue] = useState('home');
@@ -17,6 +14,10 @@ const LabelBottomNavigation = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
     navigate(`/${newValue}`);
+  };
+
+  const iconStyle = {
+    fontSize: '1.5rem'
   };
 
   return (
@@ -44,7 +45,7 @@ const LabelBottomNavigation = () => {
                 visibility: 'visible',
                 opacity: 1,
               },
-              '& .MuiSvgIcon-root': {
+              '& svg': {
                 color: '#1976d2',
               },
             },
@@ -57,9 +58,8 @@ const LabelBottomNavigation = () => {
               transition: 'none',
             },
           },
-          '& .MuiSvgIcon-root': {
+          '& svg': {
             color: '#757575',
-            fontSize: '1.5rem',
             marginBottom: '2px',
           },
         }}
@@ -67,32 +67,32 @@ const LabelBottomNavigation = () => {
         <BottomNavigationAction
           label="Home"
           value="home"
-          icon={<Home />}
+          icon={<AiOutlineHome style={iconStyle} />}
         />
         <BottomNavigationAction
           label="Leads"
           value="leads"
-          icon={<Message />}
+          icon={<AiOutlineMessage style={iconStyle} />}
         />
         <BottomNavigationAction
           label="B2B"
           value="b2b"
-          icon={<Business />}
+          icon={<BiBuildingHouse style={iconStyle} />}
         />
         <BottomNavigationAction
           label="Pay"
           value="pay"
-          icon={<Payment />}
+          icon={<BsCreditCard2Back style={iconStyle} />}
         />
         <BottomNavigationAction
           label="News"
           value="news"
-          icon={<Newspaper />}
+          icon={<HiOutlineNewspaper style={iconStyle} />}
         />
         <BottomNavigationAction
           label="More"
           value="more"
-          icon={<Menu />}
+          icon={<CgMenuGridO style={iconStyle} />}
         />
       </BottomNavigation>
     </Paper>

@@ -1,8 +1,16 @@
 import React from 'react';
-import { Grid, Typography, Box, Container, Button, Paper } from '@mui/material';
+import { Grid, Typography, Box, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import SearchBar from '../SearchBar';
 import { useNavigate } from 'react-router-dom';
+import { BiBuildingHouse, BiDumbbell } from 'react-icons/bi';
+import { FaUserDoctor, FaCarSide, FaGraduationCap } from 'react-icons/fa6';
+import { MdTravelExplore, MdHomeRepairService } from 'react-icons/md';
+import { GiLipstick } from 'react-icons/gi';
+import { RiHandHeartLine } from 'react-icons/ri';
+import { TbTruckDelivery } from 'react-icons/tb';
+import { BsHouses } from 'react-icons/bs';
+import { MdWorkOutline } from 'react-icons/md';
 
 const ServiceItem = styled(Box)(({ theme }) => ({
   textAlign: 'center',
@@ -14,6 +22,9 @@ const ServiceItem = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   '&:hover': {
     backgroundColor: 'rgba(0, 0, 0, 0.04)',
+    '& .service-icon': {
+      transform: 'scale(1.1)',
+    }
   },
 }));
 
@@ -27,68 +38,71 @@ const IconWrapper = styled('div')({
   '& svg': {
     width: '100%',
     height: '100%',
-    color: '#1976d2',
+    transition: 'transform 0.2s ease-in-out',
   },
+  '& .service-icon': {
+    transition: 'transform 0.2s ease-in-out',
+  }
 });
 
 const services = [
   {
-    icon: '/icons/b2b.svg',
+    icon: <BiBuildingHouse className="service-icon" style={{ color: '#0B5394' }} />,
     title: 'B2B',
     path: '/b2b'
   },
   {
-    icon: '/icons/doctor.svg',
+    icon: <FaUserDoctor className="service-icon" style={{ color: '#E74C3C' }} />,
     title: 'Doctors',
     path: '/doctors'
   },
   {
-    icon: '/icons/travel.svg',
+    icon: <MdTravelExplore className="service-icon" style={{ color: '#3498DB' }} />,
     title: 'Travel',
     path: '/travel'
   },
   {
-    icon: '/icons/car.svg',
+    icon: <FaCarSide className="service-icon" style={{ color: '#F39C12' }} />,
     title: 'Car\nHire',
     path: '/car-hire'
   },
   {
-    icon: '/icons/beauty.svg',
+    icon: <GiLipstick className="service-icon" style={{ color: '#E83E8C' }} />,
     title: 'Beauty',
     path: '/beauty'
   },
   {
-    icon: '/icons/wedding.svg',
+    icon: <RiHandHeartLine className="service-icon" style={{ color: '#FF4D6D' }} />,
     title: 'Wedding\nPlanning',
     path: '/wedding'
   },
   {
-    icon: '/icons/gym.svg',
+    icon: <BiDumbbell className="service-icon" style={{ color: '#6C5CE7' }} />,
     title: 'Gyms',
     path: '/gyms'
   },
   {
-    icon: '/icons/education.svg',
+    icon: <FaGraduationCap className="service-icon" style={{ color: '#2ECC71' }} />,
     title: 'Education',
     path: '/education'
   },
   {
-    icon: '/icons/movers.svg',
+    icon: <TbTruckDelivery className="service-icon" style={{ color: '#8E44AD' }} />,
     title: 'Packers\n&\nMovers',
     path: '/movers'
   },
   {
-    icon: '/icons/repair.svg',
+    icon: <MdHomeRepairService className="service-icon" style={{ color: '#D35400' }} />,
     title: 'Repairs\n&\nServices',
     path: '/repairs'
   },
   {
-    icon: '/icons/rent.svg',
+    icon: <BsHouses className="service-icon" style={{ color: '#16A085' }} />,
     title: 'Rent\nor\nHire',
     path: '/rent'
   },
   {
-    icon: '/icons/jobs.svg',
+    icon: <MdWorkOutline className="service-icon" style={{ color: '#27AE60' }} />,
     title: 'Jobs',
     path: '/jobs'
   }
@@ -108,11 +122,7 @@ const Home = () => {
             <Grid item xs={3} key={index}>
               <ServiceItem onClick={() => navigate(service.path)}>
                 <IconWrapper>
-                  <img 
-                    src={service.icon} 
-                    alt={service.title}
-                    style={{ width: '100%', height: '100%' }}
-                  />
+                  {service.icon}
                 </IconWrapper>
                 <Typography 
                   variant="caption" 
