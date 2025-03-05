@@ -55,7 +55,7 @@ const SearchBar = () => {
         <Search />
       </StyledIconButton>
       <StyledInputBase
-        placeholder="Search for services in Balagha"
+        placeholder="Search for services in Balaghat"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
