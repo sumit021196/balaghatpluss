@@ -9,7 +9,7 @@ import CategoryPage from './pages/CategoryPage';
 import BusinessDetails from './pages/BusinessDetails';
 import Sidebar from './Sidebar';
 
-// Create a theme instance
+// Create a theme instance with improved compatibility
 const theme = createTheme({
   palette: {
     background: {
@@ -30,13 +30,27 @@ const theme = createTheme({
       'sans-serif'
     ].join(','),
   },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        '@media print': {
+          '*': {
+            colorAdjust: 'exact',
+          },
+        },
+        html: {
+          textSizeAdjust: '100%',
+        },
+      },
+    },
+  },
 });
 
 function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const toggleDrawer = (open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    if (event?.type === 'keydown' && (event?.key === 'Tab' || event?.key === 'Shift')) {
       return;
     }
     setDrawerOpen(open);
@@ -52,17 +66,24 @@ function App() {
           display: 'flex',
           flexDirection: 'column'
         }}>
-          <ResponsiveAppBar />
+          <ResponsiveAppBar toggleDrawer={toggleDrawer} />
+          {/* ...rest of your components... */}
           <IconButton
             color="inherit"
-            aria-label="open drawer"
+            aria-label="Menu"
             edge="start"
             onClick={toggleDrawer(true)}
             style={{ position: 'absolute', top: 16, left: 16 }}
+            title="Open menu"
           >
-            <MenuIcon />
+            <MenuIcon aria-hidden="true" />
           </IconButton>
-          <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
+          <Drawer 
+            anchor="left" 
+            open={drawerOpen} 
+            onClose={toggleDrawer(false)}
+            aria-label="Navigation drawer"
+          >
             <Sidebar />
           </Drawer>
           <main style={{ flex: 1 }}>

@@ -46,7 +46,7 @@ const IconContainer = styled(Box)({
   },
 });
 
-const ResponsiveAppBar = () => {
+const ResponsiveAppBar = ({ toggleDrawer }) => {
   return (
     <StyledAppBar position="sticky">
       <Toolbar>
@@ -60,10 +60,17 @@ const ResponsiveAppBar = () => {
           Advertise
         </AdvertiseButton>
         <IconContainer>
-          <IconButton>
+          <IconButton 
+            aria-label="notifications"
+            title="Notifications"
+          >
             <NotificationsNone />
           </IconButton>
-          <IconButton>
+          <IconButton 
+            onClick={toggleDrawer(true)}
+            aria-label="account menu"
+            title="Open account menu"
+          >
             <AccountCircle />
           </IconButton>
         </IconContainer>
