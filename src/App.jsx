@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
+import { ThemeProvider, createTheme, CssBaseline, Drawer, IconButton } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import ResponsiveAppBar from './ResponsiveAppBar';
 import LabelBottomNavigation from './LabelBottomNavigation';
 import Home from './pages/Home';
 import CategoryPage from './pages/CategoryPage';
 import BusinessDetails from './pages/BusinessDetails';
+import Sidebar from './Sidebar';
 
 // Create a theme instance
 const theme = createTheme({
@@ -31,6 +33,15 @@ const theme = createTheme({
 });
 
 function App() {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const toggleDrawer = (open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setDrawerOpen(open);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -42,6 +53,18 @@ function App() {
           flexDirection: 'column'
         }}>
           <ResponsiveAppBar />
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={toggleDrawer(true)}
+            style={{ position: 'absolute', top: 16, left: 16 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
+            <Sidebar />
+          </Drawer>
           <main style={{ flex: 1 }}>
             <Routes>
               <Route path="/" element={<Home />} />
