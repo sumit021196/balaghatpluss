@@ -7,6 +7,7 @@ import LabelBottomNavigation from './LabelBottomNavigation';
 import Home from './pages/Home';
 import CategoryPage from './pages/CategoryPage';
 import BusinessDetails from './pages/BusinessDetails';
+import B2B from './pages/B2B';
 import Sidebar from './Sidebar';
 
 // Create a theme instance with improved compatibility
@@ -95,7 +96,7 @@ function App() {
               <Route path="/category/:id" element={<CategoryPage />} />
               <Route path="/business/:id" element={<BusinessDetails />} />
               <Route path="/leads" element={<div>Leads Page</div>} />
-              <Route path="/b2b" element={<div>B2B Page</div>} />
+              <Route path="/b2b" element={<B2B />} />
               <Route path="/pay" element={<div>Payment Page</div>} />
               <Route path="/news" element={<div>News Page</div>} />
               <Route path="/more" element={<div>More Options</div>} />
