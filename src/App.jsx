@@ -56,6 +56,10 @@ function App() {
     setDrawerOpen(open);
   };
 
+  const handleClose = () => {
+    setDrawerOpen(false);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -67,7 +71,6 @@ function App() {
           flexDirection: 'column'
         }}>
           <ResponsiveAppBar toggleDrawer={toggleDrawer} />
-          {/* ...rest of your components... */}
           <IconButton
             color="inherit"
             aria-label="Menu"
@@ -81,10 +84,10 @@ function App() {
           <Drawer 
             anchor="left" 
             open={drawerOpen} 
-            onClose={toggleDrawer(false)}
+            onClose={handleClose}
             aria-label="Navigation drawer"
           >
-            <Sidebar />
+            <Sidebar onClose={handleClose} />
           </Drawer>
           <main style={{ flex: 1 }}>
             <Routes>
