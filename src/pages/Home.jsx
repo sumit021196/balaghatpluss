@@ -5,12 +5,13 @@ import SearchBar from '../SearchBar';
 import { useNavigate } from 'react-router-dom';
 import { BiBuildingHouse, BiDumbbell } from 'react-icons/bi';
 import { FaUserDoctor, FaCarSide, FaGraduationCap, FaMoneyBillWave } from 'react-icons/fa6';
-import { MdTravelExplore, MdHomeRepairService, MdExpandMore } from 'react-icons/md';
+import { MdTravelExplore, MdHomeRepairService, MdExpandMore, MdWorkOutline, MdFitnessCenter, MdEmergency, MdLocalGroceryStore, MdDirectionsCar, MdLocalOffer } from 'react-icons/md';
 import { GiLipstick } from 'react-icons/gi';
 import { RiHandHeartLine, RiHomeHeartFill } from 'react-icons/ri';
 import { TbTruckDelivery } from 'react-icons/tb';
-import { BsHouses, BsBuildingsFill } from 'react-icons/bs';
-import { MdWorkOutline } from 'react-icons/md';
+import { BsHouses, BsBuildingsFill, BsDroplet, BsShop } from 'react-icons/bs';
+import { FaTshirt, FaTractor, FaHamburger, FaFilm, FaCalendarAlt } from 'react-icons/fa';
+import { GiClothes, GiFarmer } from 'react-icons/gi';
 
 const ServiceItem = styled(Box)(({ theme }) => ({
   textAlign: 'center',
@@ -78,6 +79,11 @@ const services = [
     path: '/doctors'
   },
   {
+    icon: <MdWorkOutline className="service-icon" style={{ color: '#2ECC71' }} />,
+    title: 'Govt\nSchemes',
+    path: '/government-schemes'
+  },
+  {
     icon: <MdTravelExplore className="service-icon" style={{ color: '#3498DB' }} />,
     title: 'Travel',
     path: '/travel'
@@ -99,8 +105,8 @@ const services = [
   },
   {
     icon: <BiDumbbell className="service-icon" style={{ color: '#6C5CE7' }} />,
-    title: 'Gyms',
-    path: '/gyms'
+    title: 'Fitness',
+    path: '/fitness'
   },
   {
     icon: <FaGraduationCap className="service-icon" style={{ color: '#2ECC71' }} />,
@@ -109,28 +115,68 @@ const services = [
   },
   {
     icon: <TbTruckDelivery className="service-icon" style={{ color: '#8E44AD' }} />,
-    title: 'Packers\n&\nMovers',
-    path: '/movers'
+    title: 'Transport',
+    path: '/transportation'
   },
   {
     icon: <MdHomeRepairService className="service-icon" style={{ color: '#D35400' }} />,
-    title: 'Repairs\n&\nServices',
+    title: 'Repairs',
     path: '/repairs'
   },
   {
-    icon: <BsHouses className="service-icon" style={{ color: '#16A085' }} />,
-    title: 'Rent\nor\nHire',
-    path: '/rent'
+    icon: <MdEmergency className="service-icon" style={{ color: '#FF0000' }} />,
+    title: 'Emergency',
+    path: '/emergency'
   },
   {
-    icon: <MdWorkOutline className="service-icon" style={{ color: '#27AE60' }} />,
-    title: 'Jobs',
-    path: '/jobs'
+    icon: <FaTractor className="service-icon" style={{ color: '#27AE60' }} />,
+    title: 'Farmer',
+    path: '/farmer'
   },
   {
-    icon: <FaMoneyBillWave className="service-icon" style={{ color: '#2980B9' }} />,
-    title: 'Loans',
-    path: '/loans'
+    icon: <FaFilm className="service-icon" style={{ color: '#2C3E50' }} />,
+    title: 'Media',
+    path: '/media'
+  },
+  {
+    icon: <FaHamburger className="service-icon" style={{ color: '#E67E22' }} />,
+    title: 'Food',
+    path: '/food'
+  },
+  {
+    icon: <FaCalendarAlt className="service-icon" style={{ color: '#9B59B6' }} />,
+    title: 'Events',
+    path: '/events'
+  },
+  {
+    icon: <MdLocalOffer className="service-icon" style={{ color: '#16A085' }} />,
+    title: 'Event\nMgmt',
+    path: '/event-management'
+  },
+  {
+    icon: <BsShop className="service-icon" style={{ color: '#D35400' }} />,
+    title: 'Local\nProducts',
+    path: '/local-products'
+  },
+  {
+    icon: <FaTshirt className="service-icon" style={{ color: '#E74C3C' }} />,
+    title: 'Fashion',
+    path: '/fashion'
+  },
+  {
+    icon: <MdWorkOutline className="service-icon" style={{ color: '#2C3E50' }} />,
+    title: 'Hire &\nFire',
+    path: '/hire-fire'
+  },
+  {
+    icon: <BsDroplet className="service-icon" style={{ color: '#3498DB' }} />,
+    title: 'Nature',
+    path: '/nature'
+  },
+  {
+    icon: <MdLocalGroceryStore className="service-icon" style={{ color: '#27AE60' }} />,
+    title: 'Kirana',
+    path: '/kirana'
   },
   {
     icon: <RiHomeHeartFill className="service-icon" style={{ color: '#C0392B' }} />,
@@ -153,9 +199,7 @@ const promotionalApps = [
 
 const Home = () => {
   const navigate = useNavigate();
-  const [showAllServices, setShowAllServices] = React.useState(false);
-
-  const displayedServices = showAllServices ? services : services.slice(0, 12);
+  const displayedServices = services; // Show all services by default
 
   return (
     <Container maxWidth="md" sx={{ pb: 8 }}>
@@ -184,71 +228,6 @@ const Home = () => {
                   {service.title}
                 </Typography>
               </ServiceItem>
-            </Grid>
-          ))}
-          {!showAllServices && (
-            <Grid item xs={3}>
-              <ServiceItem onClick={() => setShowAllServices(true)}>
-                <IconWrapper>
-                  <MdExpandMore className="service-icon" style={{ color: '#1976d2' }} />
-                </IconWrapper>
-                <Typography 
-                  variant="caption" 
-                  component="div"
-                  sx={{ 
-                    fontSize: '11px',
-                    lineHeight: 1.1,
-                    color: '#555',
-                    whiteSpace: 'pre-line',
-                    textAlign: 'center',
-                  }}
-                >
-                  Show More
-                </Typography>
-              </ServiceItem>
-            </Grid>
-          )}
-        </Grid>
-
-        <PromotionalCard>
-          <Typography variant="h5" sx={{ color: '#0277bd', fontWeight: 'bold', mb: 1 }}>
-            Connect with
-          </Typography>
-          <Typography variant="h4" sx={{ color: '#0277bd', fontWeight: 'bold', mb: 1 }}>
-            1 Lakh+
-          </Typography>
-          <Typography variant="subtitle1" sx={{ color: '#0277bd', mb: 2 }}>
-            Customers on BalaghatPlus
-          </Typography>
-          <Button 
-            variant="contained" 
-            sx={{ 
-              bgcolor: '#1976d2',
-              '&:hover': { bgcolor: '#1565c0' },
-              borderRadius: '4px',
-              textTransform: 'none',
-              px: 4,
-            }}
-          >
-            List your business for FREE
-          </Button>
-        </PromotionalCard>
-
-        <Grid container spacing={2} sx={{ mt: 4 }}>
-          {promotionalApps.map((app, index) => (
-            <Grid item xs={3} key={index}>
-              <AppCard bgcolor={app.bgcolor}>
-                <Typography 
-                  variant="caption" 
-                  sx={{ 
-                    display: 'block',
-                    whiteSpace: 'pre-line',
-                    fontWeight: 500
-                  }}
-                >
-                  {app.title}
-                </Typography>
-              </AppCard>
             </Grid>
           ))}
         </Grid>
