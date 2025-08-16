@@ -11,6 +11,7 @@ import B2B from './pages/B2B';
 import Education from './pages/Education';
 import Schools from './pages/Schools';
 import Sidebar from './Sidebar';
+import GovernmentSchemes from './pages/GovernmentSchemes';
 
 // Create a theme instance with improved compatibility
 const theme = createTheme({
@@ -104,6 +105,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/category/:id" element={<CategoryPage />} />
                 <Route path="/business/:id" element={<BusinessDetails />} />
+                <Route path="/government-schemes" element={<GovernmentSchemes />} />
                 <Route path="/leads" element={<div>Leads Page</div>} />
                 <Route path="/b2b" element={<B2B />} />
                 <Route path="/education" element={<Education />} />
