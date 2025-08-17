@@ -25,8 +25,15 @@ const ServiceItem = styled(Box)(({ theme }) => ({
     backgroundColor: 'rgba(0, 0, 0, 0.04)',
     '& .service-icon': {
       transform: 'scale(1.1)',
+    },
+    '& .service-title': {
+      fontWeight: 'bold',
     }
   },
+  '& .service-title': {
+    fontWeight: 'bold',
+    whiteSpace: 'pre-line'
+  }
 }));
 
 const IconWrapper = styled('div')({
