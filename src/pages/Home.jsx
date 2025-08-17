@@ -10,7 +10,7 @@ import { GiLipstick } from 'react-icons/gi';
 import { RiHandHeartLine, RiHomeHeartFill } from 'react-icons/ri';
 import { TbTruckDelivery } from 'react-icons/tb';
 import { BsHouses, BsBuildingsFill, BsDroplet, BsShop } from 'react-icons/bs';
-import { FaTshirt, FaTractor, FaHamburger, FaFilm, FaCalendarAlt } from 'react-icons/fa';
+import { FaTshirt, FaTractor, FaHamburger, FaFilm, FaCalendarAlt, FaCarAlt } from 'react-icons/fa';
 import { GiClothes, GiFarmer } from 'react-icons/gi';
 
 const ServiceItem = styled(Box)(({ theme }) => ({
@@ -87,11 +87,6 @@ const services = [
     icon: <MdTravelExplore className="service-icon" style={{ color: '#3498DB' }} />,
     title: 'Travel',
     path: '/travel'
-  },
-  {
-    icon: <FaCarSide className="service-icon" style={{ color: '#F39C12' }} />,
-    title: 'Car\nHire',
-    path: '/car-hire'
   },
   {
     icon: <GiLipstick className="service-icon" style={{ color: '#E83E8C' }} />,
@@ -177,6 +172,11 @@ const services = [
     icon: <MdLocalGroceryStore className="service-icon" style={{ color: '#27AE60' }} />,
     title: 'Kirana',
     path: '/kirana'
+  },
+  {
+    icon: <FaCarAlt className="service-icon" style={{ color: '#F39C12' }} />,
+    title: 'Car Hire',
+    path: '/car-hire'
   },
   {
     icon: <RiHomeHeartFill className="service-icon" style={{ color: '#C0392B' }} />,

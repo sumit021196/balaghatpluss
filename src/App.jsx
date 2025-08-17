@@ -13,6 +13,7 @@ import Schools from './pages/Schools';
 import Sidebar from './Sidebar';
 import GovernmentSchemes from './pages/GovernmentSchemes';
 import News from './pages/News';
+import CarHire from './pages/CarHire';
 
 // Create a theme instance with improved compatibility
 const theme = createTheme({
@@ -117,6 +118,7 @@ function App() {
                 <Route path="/education/vocational-training" element={<div>Vocational Training Page</div>} />
                 <Route path="/pay" element={<div>Payment Page</div>} />
                 <Route path="/news" element={<News />} />
+                <Route path="/car-hire" element={<CarHire />} />
                 <Route path="/more" element={<div>More Options</div>} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
