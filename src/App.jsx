@@ -14,6 +14,9 @@ import Sidebar from './Sidebar';
 import GovernmentSchemes from './pages/GovernmentSchemes';
 import News from './pages/News';
 import CarHire from './pages/CarHire';
+import LocalProducts from './pages/LocalProducts';
+import Doctors from './pages/Doctors';
+import HireFire from './pages/HireFire';
 
 // Create a theme instance with improved compatibility
 const theme = createTheme({
@@ -111,6 +114,13 @@ function App() {
                 <Route path="/leads" element={<div>Leads Page</div>} />
                 <Route path="/b2b" element={<B2B />} />
                 <Route path="/education" element={<Education />} />
+                <Route path="/schools" element={<Schools />} />
+                <Route path="/government-schemes" element={<GovernmentSchemes />} />
+                <Route path="/news" element={<News />} />
+                <Route path="/car-hire" element={<CarHire />} />
+                <Route path="/local-products" element={<LocalProducts />} />
+                <Route path="/doctors" element={<Doctors />} />
+                <Route path="/hire-fire" element={<HireFire />} />
                 <Route path="/education/schools" element={<Schools />} />
                 <Route path="/education/colleges" element={<div>Colleges Page</div>} />
                 <Route path="/education/hobbies" element={<div>Hobbies Page</div>} />
@@ -119,6 +129,7 @@ function App() {
                 <Route path="/pay" element={<div>Payment Page</div>} />
                 <Route path="/news" element={<News />} />
                 <Route path="/car-hire" element={<CarHire />} />
+                <Route path="/local-products" element={<LocalProducts />} />
                 <Route path="/more" element={<div>More Options</div>} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>

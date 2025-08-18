@@ -15,24 +15,21 @@ import { GiClothes, GiFarmer } from 'react-icons/gi';
 
 const ServiceItem = styled(Box)(({ theme }) => ({
   textAlign: 'center',
-  color: '#666',
+  color: '#333',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   cursor: 'pointer',
   padding: theme.spacing(1),
-  '&:hover': {
-    backgroundColor: 'rgba(0, 0, 0, 0.04)',
-    '& .service-icon': {
-      transform: 'scale(1.1)',
-    },
-    '& .service-title': {
-      fontWeight: 'bold',
-    }
-  },
   '& .service-title': {
-    fontWeight: 'bold',
-    whiteSpace: 'pre-line'
+    fontWeight: '600',
+    whiteSpace: 'pre-line',
+    fontSize: '0.9rem',
+    lineHeight: '1.2',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '0.8rem',
+      fontWeight: '700'
+    }
   }
 }));
 
@@ -76,34 +73,15 @@ const AppCard = styled(Paper)(({ bgcolor }) => ({
 
 const services = [
   {
-    icon: <BiBuildingHouse className="service-icon" style={{ color: '#0B5394' }} />,
-    title: 'B2B',
-    path: '/b2b'
-  },
-  {
     icon: <FaUserDoctor className="service-icon" style={{ color: '#E74C3C' }} />,
     title: 'Doctors',
-    path: '/doctors'
+    path: '/doctors',
+    description: 'Book appointments or consult online with top doctors in Balaghat'
   },
   {
     icon: <MdWorkOutline className="service-icon" style={{ color: '#2ECC71' }} />,
     title: 'Govt\nSchemes',
     path: '/government-schemes'
-  },
-  {
-    icon: <MdTravelExplore className="service-icon" style={{ color: '#3498DB' }} />,
-    title: 'Travel',
-    path: '/travel'
-  },
-  {
-    icon: <GiLipstick className="service-icon" style={{ color: '#E83E8C' }} />,
-    title: 'Beauty',
-    path: '/beauty'
-  },
-  {
-    icon: <RiHandHeartLine className="service-icon" style={{ color: '#FF4D6D' }} />,
-    title: 'Wedding\nPlanning',
-    path: '/wedding'
   },
   {
     icon: <BiDumbbell className="service-icon" style={{ color: '#6C5CE7' }} />,
@@ -146,11 +124,6 @@ const services = [
     path: '/food'
   },
   {
-    icon: <FaCalendarAlt className="service-icon" style={{ color: '#9B59B6' }} />,
-    title: 'Events',
-    path: '/events'
-  },
-  {
     icon: <MdLocalOffer className="service-icon" style={{ color: '#16A085' }} />,
     title: 'Event\nMgmt',
     path: '/event-management'
@@ -189,11 +162,6 @@ const services = [
     icon: <RiHomeHeartFill className="service-icon" style={{ color: '#C0392B' }} />,
     title: 'Real\nEstate',
     path: '/real-estate'
-  },
-  {
-    icon: <BsBuildingsFill className="service-icon" style={{ color: '#8E44AD' }} />,
-    title: 'PG/Hostel',
-    path: '/pg-hostel'
   }
 ];
 
