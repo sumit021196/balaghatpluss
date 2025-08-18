@@ -113,7 +113,8 @@ const services = [
   {
     icon: <MdHomeRepairService className="service-icon" style={{ color: '#D35400' }} />,
     title: 'Repairs',
-    path: '/repairs'
+    path: '/repair-services',
+    description: 'Find electricians, plumbers, AC repair, mobile repair, and bike repair services'
   },
   {
     icon: <MdEmergency className="service-icon" style={{ color: '#FF0000' }} />,
