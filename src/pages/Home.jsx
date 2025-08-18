@@ -124,7 +124,8 @@ const services = [
   {
     icon: <FaTractor className="service-icon" style={{ color: '#27AE60' }} />,
     title: 'Farmer',
-    path: '/farmer'
+    path: '/farmer-services',
+    description: 'Krishi bazar rates, seeds, equipment rental, and loan services'
   },
   {
     icon: <FaFilm className="service-icon" style={{ color: '#2C3E50' }} />,

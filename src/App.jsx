@@ -19,6 +19,7 @@ import Doctors from './pages/Doctors';
 import HireFire from './pages/HireFire';
 import Jobs from './pages/Jobs';
 import RepairServices from './pages/RepairServices';
+import FarmerServices from './pages/FarmerServices';
 
 // Create a theme instance with improved compatibility
 const theme = createTheme({
@@ -125,6 +126,7 @@ function App() {
                 <Route path="/hire-fire" element={<HireFire />} />
                 <Route path="/jobs" element={<Jobs />} />
                 <Route path="/repair-services" element={<RepairServices />} />
+                <Route path="/farmer-services" element={<FarmerServices />} />
                 <Route path="/education/schools" element={<Schools />} />
                 <Route path="/education/colleges" element={<div>Colleges Page</div>} />
                 <Route path="/education/hobbies" element={<div>Hobbies Page</div>} />
