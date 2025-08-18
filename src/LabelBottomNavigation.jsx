@@ -34,8 +34,12 @@ const LabelBottomNavigation = () => {
             minWidth: 'auto',
             padding: '6px 0',
             color: '#757575',
+            '&.Mui-focusVisible, &:focus-visible': {
+              backgroundColor: 'transparent',
+            },
             '&.Mui-selected': {
               color: '#1976d2',
+              backgroundColor: 'transparent',
               '& .MuiBottomNavigationAction-label': {
                 fontSize: '0.75rem',
                 fontWeight: 600,
@@ -57,10 +61,19 @@ const LabelBottomNavigation = () => {
               opacity: 1,
               transition: 'none',
             },
+            '&:hover': {
+              backgroundColor: 'rgba(0, 0, 0, 0.04)',
+            },
+            '&.Mui-selected:hover': {
+              backgroundColor: 'rgba(25, 118, 210, 0.08)',
+            },
           },
           '& svg': {
             color: '#757575',
             marginBottom: '2px',
+          },
+          '& .MuiTouchRipple-root': {
+            display: 'none',
           },
         }}
       >
