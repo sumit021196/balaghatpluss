@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 import SearchBar from '../SearchBar';
 import { useNavigate } from 'react-router-dom';
 import { BiBuildingHouse, BiDumbbell } from 'react-icons/bi';
-import { FaUserDoctor, FaCarSide, FaGraduationCap, FaMoneyBillWave } from 'react-icons/fa6';
+import { FaUserDoctor, FaCarSide, FaGraduationCap, FaMoneyBillWave, FaBriefcase, FaSuitcase } from 'react-icons/fa6';
 import { MdTravelExplore, MdHomeRepairService, MdExpandMore, MdWorkOutline, MdFitnessCenter, MdEmergency, MdLocalGroceryStore, MdDirectionsCar, MdLocalOffer } from 'react-icons/md';
 import { GiLipstick } from 'react-icons/gi';
 import { RiHandHeartLine, RiHomeHeartFill } from 'react-icons/ri';
@@ -77,6 +77,18 @@ const services = [
     title: 'Doctors',
     path: '/doctors',
     description: 'Book appointments or consult online with top doctors in Balaghat'
+  },
+  {
+    icon: <FaBriefcase className="service-icon" style={{ color: '#8E44AD' }} />,
+    title: 'Hire & Fire',
+    path: '/hire-fire',
+    description: 'Find daily wage workers, security guards, and domestic help'
+  },
+  {
+    icon: <FaSuitcase className="service-icon" style={{ color: '#27AE60' }} />,
+    title: 'Jobs',
+    path: '/jobs',
+    description: 'Find local jobs and employment opportunities in Balaghat'
   },
   {
     icon: <MdWorkOutline className="service-icon" style={{ color: '#2ECC71' }} />,
