@@ -21,22 +21,6 @@ const Logo = styled('div')({
   },
 });
 
-const AdvertiseButton = styled(Button)(({ theme }) => ({
-  border: '1px solid #1976d2',
-  color: '#1976d2',
-  borderRadius: '20px',
-  padding: '4px 16px',
-  textTransform: 'none',
-  fontSize: '14px',
-  marginLeft: 'auto',
-  marginRight: '12px',
-  fontWeight: 500,
-  '&:hover': {
-    backgroundColor: 'rgba(25, 118, 210, 0.04)',
-    border: '1px solid #1976d2',
-  },
-}));
-
 const IconContainer = styled(Box)({
   display: 'flex',
   gap: '4px',
@@ -56,9 +40,7 @@ const ResponsiveAppBar = ({ toggleDrawer }) => {
             alt="BalaghatPlus"
           />
         </Logo>
-        <AdvertiseButton variant="outlined">
-          Advertise
-        </AdvertiseButton>
+        <Box sx={{ marginLeft: 'auto' }} />
         <IconContainer>
           <IconButton 
             aria-label="notifications"
