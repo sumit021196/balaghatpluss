@@ -20,6 +20,13 @@ import HireFire from './pages/HireFire';
 import Jobs from './pages/Jobs';
 import RepairServices from './pages/RepairServices';
 import FarmerServices from './pages/FarmerServices';
+// More section pages
+import MorePage from './pages/More';
+import AboutUs from './pages/More/AboutUs';
+import ContactUs from './pages/More/ContactUs';
+import PrivacyPolicy from './pages/More/PrivacyPolicy';
+import TermsConditions from './pages/More/TermsConditions';
+import HelpFAQ from './pages/More/HelpFAQ';
 
 // Create a theme instance with improved compatibility
 const theme = createTheme({
@@ -136,7 +143,13 @@ function App() {
                 <Route path="/news" element={<News />} />
                 <Route path="/car-hire" element={<CarHire />} />
                 <Route path="/local-products" element={<LocalProducts />} />
-                <Route path="/more" element={<div>More Options</div>} />
+                {/* More Section Routes */}
+                <Route path="/more" element={<MorePage />} />
+                <Route path="/about" element={<AboutUs />} />
+                <Route path="/contact" element={<ContactUs />} />
+                <Route path="/privacy" element={<PrivacyPolicy />} />
+                <Route path="/terms" element={<TermsConditions />} />
+                <Route path="/help" element={<HelpFAQ />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </Suspense>

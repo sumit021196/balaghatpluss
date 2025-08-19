@@ -153,11 +153,6 @@ const services = [
     path: '/fashion'
   },
   {
-    icon: <MdWorkOutline className="service-icon" style={{ color: '#2C3E50' }} />,
-    title: 'Hire &\nFire',
-    path: '/hire-fire'
-  },
-  {
     icon: <BsDroplet className="service-icon" style={{ color: '#3498DB' }} />,
     title: 'Nature',
     path: '/nature'
