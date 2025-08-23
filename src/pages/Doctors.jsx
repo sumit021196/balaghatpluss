@@ -25,10 +25,94 @@ const doctors = [
     fee: '₹500',
     onlineFee: '₹300',
     image: 'https://img.icons8.com/color/96/doctor-male.png',
-    about: 'Senior Cardiologist with extensive experience.',
-    services: ['ECG', 'Echo', 'Angiography']
+    about: 'Senior Cardiologist with extensive experience in interventional cardiology.',
+    services: ['ECG', 'Echo', 'Angiography', 'Angioplasty']
   },
-  // Add more doctors as needed
+  {
+    id: 2,
+    name: 'Dr. Priya Sharma',
+    speciality: 'Gynecologist',
+    experience: '12 years',
+    rating: 4.7,
+    hospital: 'Shivam Nursing Home',
+    address: 'Gandhi Chowk, Balaghat',
+    phone: '9876543211',
+    email: 'dr.priya@example.com',
+    timings: '9 AM - 5 PM',
+    fee: '₹600',
+    onlineFee: '₹400',
+    image: 'https://img.icons8.com/color/96/doctor-female.png',
+    about: 'Expert in high-risk pregnancies and laparoscopic surgeries.',
+    services: ['Pregnancy Care', 'Laparoscopy', 'Infertility']
+  },
+  {
+    id: 3,
+    name: 'Dr. Amit Patel',
+    speciality: 'Pediatrician',
+    experience: '10 years',
+    rating: 4.9,
+    hospital: 'Balaghat Child Care',
+    address: 'Medical College Road, Balaghat',
+    phone: '9876543212',
+    email: 'dr.amit@example.com',
+    timings: '11 AM - 8 PM',
+    fee: '₹400',
+    onlineFee: '₹250',
+    image: 'https://img.icons8.com/color/96/doctor-male.png',
+    about: 'Specialized in neonatal care and child development.',
+    services: ['Vaccination', 'Growth Monitoring', 'Nutrition']
+  },
+  {
+    id: 4,
+    name: 'Dr. Anjali Deshmukh',
+    speciality: 'Dermatologist',
+    experience: '8 years',
+    rating: 4.6,
+    hospital: 'Skin Care Clinic',
+    address: 'Rajiv Gandhi Marg, Balaghat',
+    phone: '9876543213',
+    email: 'dr.anjali@example.com',
+    timings: '10 AM - 7 PM',
+    fee: '₹700',
+    onlineFee: '₹500',
+    image: 'https://img.icons8.com/color/96/doctor-female.png',
+    about: 'Expert in cosmetic and medical dermatology treatments.',
+    services: ['Acne Treatment', 'Laser Therapy', 'Skin Biopsy']
+  },
+  {
+    id: 5,
+    name: 'Dr. Vikram Singh',
+    speciality: 'Orthopedic Surgeon',
+    experience: '18 years',
+    rating: 4.8,
+    hospital: 'Balaghat Ortho Care',
+    address: 'Near Bus Stand, Balaghat',
+    phone: '9876543214',
+    email: 'dr.vikram@example.com',
+    timings: '9 AM - 5 PM',
+    fee: '₹800',
+    onlineFee: '₹600',
+    image: 'https://img.icons8.com/color/96/doctor-male.png',
+    about: 'Specialized in joint replacement and sports injuries.',
+    services: ['Joint Replacement', 'Arthroscopy', 'Fracture Care']
+  },
+  {
+    id: 6,
+    name: 'Dr. Neha Gupta',
+    speciality: 'General Physician',
+    experience: '9 years',
+    rating: 4.5,
+    hospital: 'City Health Care',
+    address: 'Main Road, Balaghat',
+    phone: '9876543215',
+    email: 'dr.neha@example.com',
+    timings: '8 AM - 4 PM',
+    fee: '₹300',
+    onlineFee: '₹200',
+    image: 'https://img.icons8.com/color/96/doctor-female.png',
+    about: 'Expert in general medicine and preventive healthcare.',
+    services: ['Health Checkup', 'Diabetes Care', 'Hypertension']
+  }
 ];
 
 const StyledCard = styled(Card)({
@@ -130,6 +214,35 @@ const DoctorCard = ({ doctor }) => {
                 }}
               >
                 Video {doctor.onlineFee}
+              </Button>
+              <Button 
+                variant="contained" 
+                fullWidth 
+                size="small"
+                startIcon={<Phone fontSize="small" />}
+                onClick={() => {
+                  const message = `Hello, I would like to book an appointment with ${doctor.name} (${doctor.speciality})`;
+                  const whatsappUrl = `https://wa.me/917869814754?text=${encodeURIComponent(message)}`;
+                  window.open(whatsappUrl, '_blank');
+                }}
+                sx={{ 
+                  mt: 1,
+                  py: 0.5,
+                  fontSize: '0.75rem',
+                  textTransform: 'none',
+                  backgroundColor: '#25D366',
+                  '&:hover': {
+                    backgroundColor: '#128C7E',
+                  },
+                  '& .MuiButton-startIcon': {
+                    marginRight: '4px',
+                    '& > *': {
+                      fontSize: '1rem'
+                    }
+                  }
+                }}
+              >
+                Book via WhatsApp
               </Button>
             </Box>
             
