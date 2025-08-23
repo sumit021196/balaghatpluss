@@ -35,10 +35,12 @@ const StyledCard = styled(Card)({
   height: '100%',
   display: 'flex',
   flexDirection: 'column',
-  borderRadius: 12,
+  borderRadius: 8,
   overflow: 'hidden',
+  transition: 'transform 0.2s, box-shadow 0.2s',
   '&:hover': {
-    boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2)',
+    transform: 'translateY(-2px)',
+    boxShadow: '0 4px 8px 0 rgba(0,0,0,0.1)',
   },
 });
 
@@ -56,14 +58,14 @@ const DoctorCard = ({ doctor }) => {
               src={doctor.image} 
               alt={doctor.name}
               sx={{ 
-                width: isMobile ? 60 : 80, 
-                height: isMobile ? 60 : 80,
-                mb: 2,
+                width: isMobile ? 50 : 60, 
+                height: isMobile ? 50 : 60,
+                mb: 1,
                 mx: 'auto',
-                border: '3px solid #1976d2'
+                border: '2px solid #1976d2'
               }}
             />
-            <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 0.5, fontSize: '1rem' }}>
               {doctor.name}
             </Typography>
             <Chip 
@@ -74,16 +76,16 @@ const DoctorCard = ({ doctor }) => {
               sx={{ mb: 1 }}
             />
             
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1, mb: 1 }}>
-              <Star color="warning" fontSize="small" />
-              <Typography variant="body2">
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0.5, mb: 0.5 }}>
+              <Star color="warning" fontSize="inherit" sx={{ fontSize: '1rem' }} />
+              <Typography variant="caption" sx={{ fontSize: '0.75rem' }}>
                 {doctor.rating} • {doctor.experience}
               </Typography>
             </Box>
             
-            <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-              <LocalHospital fontSize="small" color="action" sx={{ mr: 1 }} />
-              <Typography variant="body2" color="text.secondary">
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 0.5 }}>
+              <LocalHospital fontSize="inherit" color="action" sx={{ mr: 0.5, fontSize: '1rem' }} />
+              <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.75rem' }}>
                 {doctor.hospital}
               </Typography>
             </Box>
@@ -98,43 +100,63 @@ const DoctorCard = ({ doctor }) => {
               ))}
             </Box>
             
-            <Box sx={{ bgcolor: '#f5f5f5', p: 2, borderRadius: 2, mb: 2 }}>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                <Typography variant="body2">
-                  <AccessTime fontSize="small" sx={{ verticalAlign: 'middle', mr: 0.5 }} />
+            <Box sx={{ bgcolor: '#f8f9fa', p: 1.5, borderRadius: 1, mb: 1.5, border: '1px solid #eee' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
+                <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center' }}>
+                  <AccessTime fontSize="inherit" sx={{ mr: 0.5, fontSize: '0.9rem' }} />
                   {doctor.timings}
                 </Typography>
-                <Typography variant="body2">
-                  Fee: <span style={{ fontWeight: 600, color: '#1976d2' }}>{doctor.fee}</span>
+                <Typography variant="caption" sx={{ fontWeight: 500, color: '#1976d2' }}>
+                  {doctor.fee}
                 </Typography>
               </Box>
               <Button 
                 variant="contained" 
                 fullWidth 
-                startIcon={<VideoCall />}
+                size="small"
+                startIcon={<VideoCall sx={{ fontSize: '1rem' }} />}
                 onClick={() => window.alert(`Initiating video consultation with ${doctor.name}`)}
+                sx={{ 
+                  mt: 0.5,
+                  py: 0.5,
+                  fontSize: '0.75rem',
+                  textTransform: 'none',
+                  '& .MuiButton-startIcon': {
+                    marginRight: '4px',
+                    '& > *': {
+                      fontSize: '1rem'
+                    }
+                  }
+                }}
               >
-                Video Consult ({doctor.onlineFee})
+                Video {doctor.onlineFee}
               </Button>
             </Box>
             
             <Button 
               variant="outlined" 
               fullWidth 
+              size="small"
               onClick={() => setShowContact(!showContact)}
+              sx={{ 
+                mt: 0.5, 
+                py: 0.5,
+                fontSize: '0.75rem',
+                textTransform: 'none'
+              }}
             >
-              {showContact ? 'Hide Contact' : 'Show Contact'}
+              {showContact ? 'Hide Contact' : 'Contact'}
             </Button>
             
             {showContact && (
-              <Box sx={{ mt: 2, p: 2, bgcolor: '#f9f9f9', borderRadius: 2 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                  <Phone fontSize="small" color="action" sx={{ mr: 1 }} />
-                  <Typography variant="body2">{doctor.phone}</Typography>
+              <Box sx={{ mt: 1, p: 1.5, bgcolor: '#f8f9fa', borderRadius: 1, border: '1px solid #eee' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 0.5 }}>
+                  <Phone fontSize="inherit" color="action" sx={{ mr: 0.5, fontSize: '0.9rem' }} />
+                  <Typography variant="caption">{doctor.phone}</Typography>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <Email fontSize="small" color="action" sx={{ mr: 1 }} />
-                  <Typography variant="body2">{doctor.email}</Typography>
+                  <Email fontSize="inherit" color="action" sx={{ mr: 0.5, fontSize: '0.9rem' }} />
+                  <Typography variant="caption" sx={{ wordBreak: 'break-word' }}>{doctor.email}</Typography>
                 </Box>
               </Box>
             )}
@@ -159,14 +181,8 @@ const Doctors = () => {
   });
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Box sx={{ mb: 4, textAlign: 'center' }}>
-        <Typography variant="h4" component="h1" gutterBottom sx={{ fontWeight: 600, color: '#1976d2' }}>
-          Find Doctors in Balaghat
-        </Typography>
-        <Typography variant="subtitle1" color="text.secondary" sx={{ mb: 3 }}>
-          Book appointments or consult online with top doctors near you
-        </Typography>
+    <Container maxWidth="lg" sx={{ py: 2 }}>
+      <Box sx={{ mb: 3, textAlign: 'center' }}>
         
         <TextField
           fullWidth
@@ -180,12 +196,28 @@ const Doctors = () => {
                 <SearchIcon color="action" />
               </InputAdornment>
             ),
-            sx: { borderRadius: 4, maxWidth: 600, mx: 'auto' }
+            sx: { 
+              borderRadius: 2, 
+              maxWidth: 500, 
+              mx: 'auto',
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderRadius: 2,
+                },
+              },
+              '& .MuiInputBase-input': {
+                py: 1,
+                fontSize: '0.9rem'
+              },
+              '& .MuiInputAdornment-root': {
+                mr: 1
+              }
+            }
           }}
           sx={{ mb: 3 }}
         />
         
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, justifyContent: 'center', mb: 4 }}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75, justifyContent: 'center', mb: 3 }}>
           {specialties.map((specialty) => (
             <Chip
               key={specialty}
@@ -193,7 +225,15 @@ const Doctors = () => {
               onClick={() => setSpecialtyFilter(specialty)}
               color={specialty === specialtyFilter ? 'primary' : 'default'}
               variant={specialty === specialtyFilter ? 'filled' : 'outlined'}
+              size="small"
               clickable
+              sx={{ 
+                '& .MuiChip-label': {
+                  px: 1,
+                  fontSize: '0.75rem'
+                },
+                height: '28px'
+              }}
             />
           ))}
         </Box>
