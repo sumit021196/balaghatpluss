@@ -20,6 +20,7 @@ import HireFire from './pages/HireFire';
 import Jobs from './pages/Jobs';
 import RepairServices from './pages/RepairServices';
 import FarmerServices from './pages/FarmerServices';
+import Legal from './pages/Legal';
 // More section pages
 import MorePage from './pages/More';
 import AboutUs from './pages/More/AboutUs';
@@ -134,6 +135,7 @@ function App() {
                 <Route path="/jobs" element={<Jobs />} />
                 <Route path="/repair-services" element={<RepairServices />} />
                 <Route path="/farmer-services" element={<FarmerServices />} />
+                <Route path="/legal" element={<Legal />} />
                 <Route path="/education/schools" element={<Schools />} />
                 <Route path="/education/colleges" element={<div>Colleges Page</div>} />
                 <Route path="/education/hobbies" element={<div>Hobbies Page</div>} />

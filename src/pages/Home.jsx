@@ -6,12 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import { BiBuildingHouse, BiDumbbell } from 'react-icons/bi';
 import { FaUserDoctor, FaCarSide, FaGraduationCap, FaMoneyBillWave, FaBriefcase, FaSuitcase } from 'react-icons/fa6';
 import { MdTravelExplore, MdHomeRepairService, MdExpandMore, MdWorkOutline, MdFitnessCenter, MdEmergency, MdLocalGroceryStore, MdDirectionsCar, MdLocalOffer } from 'react-icons/md';
-import { GiLipstick } from 'react-icons/gi';
+import { GiLipstick, GiGavel } from 'react-icons/gi';
 import { RiHandHeartLine, RiHomeHeartFill } from 'react-icons/ri';
 import { TbTruckDelivery } from 'react-icons/tb';
 import { BsHouses, BsBuildingsFill, BsDroplet, BsShop } from 'react-icons/bs';
 import { FaTshirt, FaTractor, FaHamburger, FaFilm, FaCalendarAlt, FaCarAlt } from 'react-icons/fa';
 import { GiClothes, GiFarmer } from 'react-icons/gi';
+import { Gavel } from '@mui/icons-material';
 
 const ServiceItem = styled(Box)(({ theme }) => ({
   textAlign: 'center',
@@ -171,6 +172,12 @@ const services = [
     icon: <RiHomeHeartFill className="service-icon" style={{ color: '#C0392B' }} />,
     title: 'Real\nEstate',
     path: '/real-estate'
+  },
+  {
+    icon: <Gavel className="service-icon" style={{ color: '#8E44AD' }} />,
+    title: 'Legal',
+    path: '/legal',
+    description: 'Legal consultation and services for property, family, criminal, and documentation matters'
   }
 ];
 
