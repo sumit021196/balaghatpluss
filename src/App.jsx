@@ -1,33 +1,34 @@
-import React, { useState, Suspense } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, createTheme, CssBaseline, Drawer, IconButton, CircularProgress, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ResponsiveAppBar from './ResponsiveAppBar';
 import LabelBottomNavigation from './LabelBottomNavigation';
-import Home from './pages/Home';
-import CategoryPage from './pages/CategoryPage';
-import BusinessDetails from './pages/BusinessDetails';
-import B2B from './pages/B2B';
-import Education from './pages/Education';
-import Schools from './pages/Schools';
 import Sidebar from './Sidebar';
-import GovernmentSchemes from './pages/GovernmentSchemes';
-import News from './pages/News';
-import CarHire from './pages/CarHire';
-import LocalProducts from './pages/LocalProducts';
-import Doctors from './pages/Doctors';
-import HireFire from './pages/HireFire';
-import Jobs from './pages/Jobs';
-import RepairServices from './pages/RepairServices';
-import FarmerServices from './pages/FarmerServices';
-import Legal from './pages/Legal';
+// Lazy-loaded pages
+const Home = lazy(() => import('./pages/Home'));
+const CategoryPage = lazy(() => import('./pages/CategoryPage'));
+const BusinessDetails = lazy(() => import('./pages/BusinessDetails'));
+const B2B = lazy(() => import('./pages/B2B'));
+const Education = lazy(() => import('./pages/Education'));
+const Schools = lazy(() => import('./pages/Schools'));
+const GovernmentSchemes = lazy(() => import('./pages/GovernmentSchemes'));
+const News = lazy(() => import('./pages/News'));
+const CarHire = lazy(() => import('./pages/CarHire'));
+const LocalProducts = lazy(() => import('./pages/LocalProducts'));
+const Doctors = lazy(() => import('./pages/Doctors'));
+const HireFire = lazy(() => import('./pages/HireFire'));
+const Jobs = lazy(() => import('./pages/Jobs'));
+const RepairServices = lazy(() => import('./pages/RepairServices'));
+const FarmerServices = lazy(() => import('./pages/FarmerServices'));
+const Legal = lazy(() => import('./pages/Legal'));
 // More section pages
-import MorePage from './pages/More';
-import AboutUs from './pages/More/AboutUs';
-import ContactUs from './pages/More/ContactUs';
-import PrivacyPolicy from './pages/More/PrivacyPolicy';
-import TermsConditions from './pages/More/TermsConditions';
-import HelpFAQ from './pages/More/HelpFAQ';
+const MorePage = lazy(() => import('./pages/More'));
+const AboutUs = lazy(() => import('./pages/More/AboutUs'));
+const ContactUs = lazy(() => import('./pages/More/ContactUs'));
+const PrivacyPolicy = lazy(() => import('./pages/More/PrivacyPolicy'));
+const TermsConditions = lazy(() => import('./pages/More/TermsConditions'));
+const HelpFAQ = lazy(() => import('./pages/More/HelpFAQ'));
 
 // Create a theme instance with improved compatibility
 const theme = createTheme({
@@ -126,10 +127,7 @@ function App() {
                 <Route path="/b2b" element={<B2B />} />
                 <Route path="/education" element={<Education />} />
                 <Route path="/schools" element={<Schools />} />
-                <Route path="/government-schemes" element={<GovernmentSchemes />} />
-                <Route path="/news" element={<News />} />
-                <Route path="/car-hire" element={<CarHire />} />
-                <Route path="/local-products" element={<LocalProducts />} />
+                
                 <Route path="/doctors" element={<Doctors />} />
                 <Route path="/hire-fire" element={<HireFire />} />
                 <Route path="/jobs" element={<Jobs />} />
@@ -142,9 +140,7 @@ function App() {
                 <Route path="/education/coaching" element={<div>Coaching Page</div>} />
                 <Route path="/education/vocational-training" element={<div>Vocational Training Page</div>} />
                 <Route path="/pay" element={<div>Payment Page</div>} />
-                <Route path="/news" element={<News />} />
-                <Route path="/car-hire" element={<CarHire />} />
-                <Route path="/local-products" element={<LocalProducts />} />
+                
                 {/* More Section Routes */}
                 <Route path="/more" element={<MorePage />} />
                 <Route path="/about" element={<AboutUs />} />
