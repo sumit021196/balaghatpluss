@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Container, Typography, Grid, Card, CardContent, CardMedia, Chip } from '@mui/material';
+import BookViaWhatsApp from '../components/BookViaWhatsApp';
 
 const LocalProducts = () => {
   // Local products from Balaghat
@@ -120,6 +121,16 @@ const LocalProducts = () => {
                 <Typography variant="caption" color="text.secondary" component="div" sx={{ mt: 'auto' }}>
                   <Box component="span" sx={{ fontWeight: 'bold' }}>Uses:</Box> {product.uses}
                 </Typography>
+                <Box sx={{ mt: 2 }}>
+                  <BookViaWhatsApp
+                    buttonLabel="Enquire via WhatsApp"
+                    buttonProps={{ size: 'small' }}
+                    type="product_enquiry"
+                    targetId={product.id}
+                    targetName={product.name}
+                    recipientPhone={'7869814754'}
+                  />
+                </Box>
               </CardContent>
             </Card>
           </Grid>

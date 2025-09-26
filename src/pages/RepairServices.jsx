@@ -21,6 +21,7 @@ import {
   Email as EmailIcon,
   LocationOn as LocationIcon
 } from '@mui/icons-material';
+import BookViaWhatsApp from '../components/BookViaWhatsApp';
 
 // Sample service data
 const serviceCategories = [
@@ -209,14 +210,15 @@ const RepairServices = () => {
                     >
                       Call Now
                     </Button>
-                    <Button 
-                      variant="contained" 
-                      color="primary"
-                      onClick={() => handleBookNow(provider)}
-                      size="small"
-                    >
-                      Book Now
-                    </Button>
+                    <BookViaWhatsApp
+                      buttonLabel="Book Now"
+                      buttonProps={{ color: 'primary', size: 'small' }}
+                      type="repair_service"
+                      targetId={provider.id}
+                      targetName={provider.name}
+                      targetSpeciality={provider.service}
+                      recipientPhone={provider.phone}
+                    />
                   </Box>
                 </CardContent>
               </Card>

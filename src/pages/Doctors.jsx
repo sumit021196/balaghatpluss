@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { 
   Container, Typography, Grid, Card, CardContent, Avatar, 
-  Button, Box, Chip, TextField, InputAdornment, useMediaQuery, useTheme
+  Button, Box, Chip, TextField, InputAdornment, useMediaQuery, useTheme, Dialog, DialogTitle, DialogContent, Snackbar, Alert
 } from '@mui/material';
 import { 
   Search as SearchIcon, LocalHospital, Phone, Email, 
   VideoCall, Star, Work, MedicalServices, LocationOn, AccessTime 
 } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
+import BookingForm from '../components/BookingForm';
+import { useCreateBooking } from '../services/bookings';
+import { openWhatsApp } from '../lib/whatsapp';
 
 // Sample doctors data
 const doctors = [
@@ -19,7 +22,7 @@ const doctors = [
     rating: 4.8,
     hospital: 'Balaghat City Hospital',
     address: 'Civil Lines, Balaghat',
-    phone: '9876543210',
+    phone: '7869814754',
     email: 'dr.rajesh@example.com',
     timings: '10 AM - 6 PM',
     fee: '₹500',
@@ -215,8 +218,36 @@ const StyledCard = styled(Card)({
 
 const DoctorCard = ({ doctor }) => {
   const [showContact, setShowContact] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const createBooking = useCreateBooking();
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+
+  const handleSubmitBooking = async (form) => {
+    const payload = {
+      type: 'doctor_appointment',
+      targetId: doctor.id,
+      targetName: doctor.name,
+      targetSpeciality: doctor.speciality,
+      customerName: form.name,
+      customerPhone: form.phone,
+      customerEmail: form.email,
+      note: form.note,
+      preferredTime: form.preferredTime,
+    };
+    try {
+      await createBooking.mutateAsync(payload);
+      setSnackbarOpen(true);
+    } catch (e) {
+      console.error('Supabase insert failed:', e);
+      alert('Booking failed');
+    }
+    const msg = `New Appointment Request\nDoctor: ${doctor.name} (${doctor.speciality})\nPatient: ${form.name}\nPhone: ${form.phone}${form.email ? `\nEmail: ${form.email}` : ''}${form.preferredTime ? `\nPreferred Time: ${form.preferredTime}` : ''}${form.note ? `\nNote: ${form.note}` : ''}`;
+    const phoneE164 = `91${doctor.phone}`; // ensure numbers stored without country code
+    openWhatsApp({ phoneE164, message: msg });
+    setOpenDialog(false);
+  };
 
   return (
     <Grid item xs={12} sm={6} md={4}>
@@ -305,11 +336,7 @@ const DoctorCard = ({ doctor }) => {
                 fullWidth 
                 size="small"
                 startIcon={<Phone fontSize="small" />}
-                onClick={() => {
-                  const message = `Hello, I would like to book an appointment with ${doctor.name} (${doctor.speciality})`;
-                  const whatsappUrl = `https://wa.me/917869814754?text=${encodeURIComponent(message)}`;
-                  window.open(whatsappUrl, '_blank');
-                }}
+                onClick={() => { if (document.activeElement && document.activeElement.blur) { document.activeElement.blur(); } setOpenDialog(true); }}
                 sx={{ 
                   mt: 1,
                   py: 0.5,
@@ -329,6 +356,21 @@ const DoctorCard = ({ doctor }) => {
               >
                 Book via WhatsApp
               </Button>
+              <Dialog open={openDialog} onClose={() => setOpenDialog(false)} fullWidth maxWidth="sm">
+                <DialogTitle>Book appointment with {doctor.name}</DialogTitle>
+                <DialogContent>
+                  <BookingForm
+                    defaultValues={{}}
+                    submitting={createBooking.isPending}
+                    onSubmit={handleSubmitBooking}
+                  />
+                </DialogContent>
+              </Dialog>
+              <Snackbar open={snackbarOpen} autoHideDuration={3000} onClose={() => setSnackbarOpen(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+                <Alert onClose={() => setSnackbarOpen(false)} severity="success" variant="filled" sx={{ width: '100%' }}>
+                  Booking saved. Opening WhatsApp…
+                </Alert>
+              </Snackbar>
             </Box>
             
             <Button 
@@ -439,8 +481,8 @@ const Doctors = () => {
       
       <Grid container spacing={3}>
         {filteredDoctors.length > 0 ? (
-          filteredDoctors.map((doctor) => (
-            <DoctorCard key={doctor.id} doctor={doctor} />
+          filteredDoctors.map((doctor, idx) => (
+            <DoctorCard key={`${doctor.id}-${doctor.phone || idx}`} doctor={doctor} />
           ))
         ) : (
           <Box sx={{ width: '100%', textAlign: 'center', py: 4 }}>
