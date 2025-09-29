@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, useMemo } from 'react';
 import { 
   Container, Typography, Grid, Card, CardContent, Avatar, 
   Button, Box, Chip, TextField, InputAdornment, useMediaQuery, useTheme, Dialog, DialogTitle, DialogContent, Snackbar, Alert
@@ -8,7 +8,7 @@ import {
   VideoCall, Star, Work, MedicalServices, LocationOn, AccessTime 
 } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
-import BookingForm from '../components/BookingForm';
+const BookingForm = React.lazy(() => import('../components/BookingForm'));
 import { useCreateBooking } from '../services/bookings';
 import { openWhatsApp } from '../lib/whatsapp';
 
@@ -216,8 +216,7 @@ const StyledCard = styled(Card)({
   },
 });
 
-const DoctorCard = ({ doctor }) => {
-  const [showContact, setShowContact] = useState(false);
+const DoctorCard = React.memo(({ doctor }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -314,31 +313,10 @@ const DoctorCard = ({ doctor }) => {
                 variant="contained" 
                 fullWidth 
                 size="small"
-                startIcon={<VideoCall sx={{ fontSize: '1rem' }} />}
-                onClick={() => window.alert(`Initiating video consultation with ${doctor.name}`)}
-                sx={{ 
-                  mt: 0.5,
-                  py: 0.5,
-                  fontSize: '0.75rem',
-                  textTransform: 'none',
-                  '& .MuiButton-startIcon': {
-                    marginRight: '4px',
-                    '& > *': {
-                      fontSize: '1rem'
-                    }
-                  }
-                }}
-              >
-                Video {doctor.onlineFee}
-              </Button>
-              <Button 
-                variant="contained" 
-                fullWidth 
-                size="small"
                 startIcon={<Phone fontSize="small" />}
                 onClick={() => { if (document.activeElement && document.activeElement.blur) { document.activeElement.blur(); } setOpenDialog(true); }}
                 sx={{ 
-                  mt: 1,
+                  mt: 0.5,
                   py: 0.5,
                   fontSize: '0.75rem',
                   textTransform: 'none',
@@ -354,16 +332,18 @@ const DoctorCard = ({ doctor }) => {
                   }
                 }}
               >
-                Book via WhatsApp
+                Book Appointment
               </Button>
               <Dialog open={openDialog} onClose={() => setOpenDialog(false)} fullWidth maxWidth="sm">
                 <DialogTitle>Book appointment with {doctor.name}</DialogTitle>
                 <DialogContent>
-                  <BookingForm
-                    defaultValues={{}}
-                    submitting={createBooking.isPending}
-                    onSubmit={handleSubmitBooking}
-                  />
+                  <Suspense fallback={null}>
+                    <BookingForm
+                      defaultValues={{}}
+                      submitting={createBooking.isPending}
+                      onSubmit={handleSubmitBooking}
+                    />
+                  </Suspense>
                 </DialogContent>
               </Dialog>
               <Snackbar open={snackbarOpen} autoHideDuration={3000} onClose={() => setSnackbarOpen(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
@@ -372,53 +352,30 @@ const DoctorCard = ({ doctor }) => {
                 </Alert>
               </Snackbar>
             </Box>
-            
-            <Button 
-              variant="outlined" 
-              fullWidth 
-              size="small"
-              onClick={() => setShowContact(!showContact)}
-              sx={{ 
-                mt: 0.5, 
-                py: 0.5,
-                fontSize: '0.75rem',
-                textTransform: 'none'
-              }}
-            >
-              {showContact ? 'Hide Contact' : 'Contact'}
-            </Button>
-            
-            {showContact && (
-              <Box sx={{ mt: 1, p: 1.5, bgcolor: '#f8f9fa', borderRadius: 1, border: '1px solid #eee' }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 0.5 }}>
-                  <Phone fontSize="inherit" color="action" sx={{ mr: 0.5, fontSize: '0.9rem' }} />
-                  <Typography variant="caption">{doctor.phone}</Typography>
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <Email fontSize="inherit" color="action" sx={{ mr: 0.5, fontSize: '0.9rem' }} />
-                  <Typography variant="caption" sx={{ wordBreak: 'break-word' }}>{doctor.email}</Typography>
-                </Box>
-              </Box>
-            )}
           </Box>
         </CardContent>
       </StyledCard>
     </Grid>
   );
-};
+});
 
 const Doctors = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [specialtyFilter, setSpecialtyFilter] = useState('All');
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [visibleCount, setVisibleCount] = useState(6);
 
   const specialties = ['All', 'Cardiologist', 'Pediatrician', 'Orthopedic', 'Gynecologist', 'Dermatologist'];
 
-  const filteredDoctors = doctors.filter(doctor => {
-    const matchesSearch = doctor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         doctor.speciality.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesSpecialty = specialtyFilter === 'All' || doctor.speciality === specialtyFilter;
-    return matchesSearch && matchesSpecialty;
-  });
+  const filteredDoctors = useMemo(() => {
+    return doctors.filter(doctor => {
+      const matchesSearch = doctor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           doctor.speciality.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSpecialty = specialtyFilter === 'All' || doctor.speciality === specialtyFilter;
+      return matchesSearch && matchesSpecialty;
+    });
+  }, [searchTerm, specialtyFilter]);
 
   return (
     <Container maxWidth="lg" sx={{ py: 2 }}>
@@ -479,9 +436,9 @@ const Doctors = () => {
         </Box>
       </Box>
       
-      <Grid container spacing={3}>
+      <Grid container spacing={2}>
         {filteredDoctors.length > 0 ? (
-          filteredDoctors.map((doctor, idx) => (
+          filteredDoctors.slice(0, visibleCount).map((doctor, idx) => (
             <DoctorCard key={`${doctor.id}-${doctor.phone || idx}`} doctor={doctor} />
           ))
         ) : (
@@ -492,6 +449,13 @@ const Doctors = () => {
           </Box>
         )}
       </Grid>
+      {filteredDoctors.length > visibleCount && (
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+          <Button variant="outlined" size="small" onClick={() => setVisibleCount(c => c + (isMobile ? 6 : 9))} sx={{ textTransform: 'none' }}>
+            Show more
+          </Button>
+        </Box>
+      )}
     </Container>
   );
 };

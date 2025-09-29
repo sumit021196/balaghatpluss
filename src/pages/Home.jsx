@@ -217,7 +217,16 @@ const Home = () => {
               }}
             >
               {section.items.map((service, index) => (
-                <Box key={index} sx={{ minWidth: { xs: '31%', sm: '23%' }, scrollSnapAlign: 'start' }}>
+                <Box
+                  key={index}
+                  sx={{
+                    // Show 3 full items and ~15% of the 4th on mobile when more than 3 items exist
+                    // Per-item width = (100% - 15%) / 3 = 28.33%
+                    minWidth: { xs: section.items.length > 3 ? '28.33%' : '33.33%', sm: '23%' },
+                    flex: '0 0 auto',
+                    scrollSnapAlign: 'start'
+                  }}
+                >
                   <ServiceItem onClick={() => handleServiceClick(service, section.title)}>
                     <IconWrapper>
                       {service.icon}
