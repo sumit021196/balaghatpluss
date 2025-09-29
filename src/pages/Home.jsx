@@ -1,19 +1,19 @@
 import React from 'react';
-import { Grid, Typography, Box, Container, Button, Paper } from '@mui/material';
+import { Grid, Typography, Box, Container, Button, Paper, Chip, Divider } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import SearchBar from '../SearchBar';
 import { useNavigate } from 'react-router-dom';
 import { BiBuildingHouse, BiDumbbell } from 'react-icons/bi';
 import { FaUserDoctor, FaCarSide, FaGraduationCap, FaMoneyBillWave, FaBriefcase, FaSuitcase } from 'react-icons/fa6';
-import { MdTravelExplore, MdHomeRepairService, MdExpandMore, MdWorkOutline, MdFitnessCenter, MdEmergency, MdLocalGroceryStore, MdDirectionsCar, MdLocalOffer } from 'react-icons/md';
-import { GiLipstick, GiGavel } from 'react-icons/gi';
+import { MdTravelExplore, MdHomeRepairService, MdExpandMore, MdWorkOutline, MdFitnessCenter, MdEmergency, MdLocalGroceryStore, MdDirectionsCar, MdLocalOffer, MdPets } from 'react-icons/md';
+import { GiLipstick, GiGavel, GiClothes } from 'react-icons/gi';
 import { RiHandHeartLine, RiHomeHeartFill } from 'react-icons/ri';
 import { TbTruckDelivery } from 'react-icons/tb';
 import { BsHouses, BsBuildingsFill, BsDroplet, BsShop } from 'react-icons/bs';
 import { FaTshirt, FaTractor, FaHamburger, FaFilm, FaCalendarAlt, FaCarAlt } from 'react-icons/fa';
-import { GiClothes, GiFarmer } from 'react-icons/gi';
 import { Gavel } from '@mui/icons-material';
-
+import { supabase } from '../lib/supabaseClient';
+// Styled components
 const ServiceItem = styled(Box)(({ theme }) => ({
   textAlign: 'center',
   color: '#333',
@@ -72,113 +72,80 @@ const AppCard = styled(Paper)(({ bgcolor }) => ({
   },
 }));
 
-const services = [
+// Services grouped into broader categories (rows become horizontally scrollable if overflow)
+const serviceSections = [
   {
-    icon: <FaUserDoctor className="service-icon" style={{ color: '#E74C3C' }} />,
-    title: 'Doctors',
-    path: '/doctors',
-    description: 'Book appointments or consult online with top doctors in Balaghat'
+    title: 'Health & Safety',
+    items: [
+      { icon: <FaUserDoctor className="service-icon" style={{ color: '#E74C3C' }} />, title: 'Doctors', path: '/doctors' },
+      { icon: <MdEmergency className="service-icon" style={{ color: '#FF0000' }} />, title: 'Emergency', path: '/emergency' },
+      { icon: <RiHandHeartLine className="service-icon" style={{ color: '#C0392B' }} />, title: 'Caretaker', path: '/caretaker' },
+      { icon: <MdPets className="service-icon" style={{ color: '#ff7043' }} />, title: 'Pet Care', path: '/pet-care' },
+    ]
   },
   {
-    icon: <FaBriefcase className="service-icon" style={{ color: '#8E44AD' }} />,
-    title: 'Hire & Fire',
-    path: '/hire-fire',
-    description: 'Find daily wage workers, security guards, and domestic help'
+    title: 'Jobs & Hiring',
+    items: [
+      { icon: <FaSuitcase className="service-icon" style={{ color: '#27AE60' }} />, title: 'Jobs', path: '/jobs' },
+      { icon: <FaBriefcase className="service-icon" style={{ color: '#8E44AD' }} />, title: 'Hire & Fire', path: '/hire-fire' },
+      { icon: <BsBuildingsFill className="service-icon" style={{ color: '#8E44AD' }} />, title: 'Hospitality', path: '/hospitality' },
+      { icon: <GiClothes className="service-icon" style={{ color: '#2980B9' }} />, title: 'Laundry', path: '/laundry' },
+    ]
   },
   {
-    icon: <FaSuitcase className="service-icon" style={{ color: '#27AE60' }} />,
-    title: 'Jobs',
-    path: '/jobs',
-    description: 'Find local jobs and employment opportunities in Balaghat'
+    title: 'Home & Personal',
+    items: [
+      { icon: <GiLipstick className="service-icon" style={{ color: '#E91E63' }} />, title: 'Beauty', path: '/beauty-services' },
+      { icon: <MdHomeRepairService className="service-icon" style={{ color: '#D35400' }} />, title: 'Repairs', path: '/repair-services' },
+      { icon: <FaTshirt className="service-icon" style={{ color: '#E74C3C' }} />, title: 'Fashion', path: '/fashion' },
+      { icon: <BsShop className="service-icon" style={{ color: '#D35400' }} />, title: 'Local\nProducts', path: '/local-products' },
+    ]
   },
   {
-    icon: <MdWorkOutline className="service-icon" style={{ color: '#2ECC71' }} />,
-    title: 'Govt\nSchemes',
-    path: '/government-schemes'
+    title: 'Transport & Travel',
+    items: [
+      { icon: <TbTruckDelivery className="service-icon" style={{ color: '#8E44AD' }} />, title: 'Transport', path: '/transportation' },
+      { icon: <FaCarAlt className="service-icon" style={{ color: '#F39C12' }} />, title: 'Car Hire', path: '/car-hire' },
+    ]
   },
   {
-    icon: <BiDumbbell className="service-icon" style={{ color: '#6C5CE7' }} />,
-    title: 'Fitness',
-    path: '/fitness'
-  },
-  {
-    icon: <FaGraduationCap className="service-icon" style={{ color: '#2ECC71' }} />,
     title: 'Education',
-    path: '/education'
+    items: [
+      { icon: <FaGraduationCap className="service-icon" style={{ color: '#2ECC71' }} />, title: 'Education', path: '/education' },
+      { icon: <MdWorkOutline className="service-icon" style={{ color: '#2ECC71' }} />, title: 'Govt\nSchemes', path: '/government-schemes' },
+    ]
   },
   {
-    icon: <TbTruckDelivery className="service-icon" style={{ color: '#8E44AD' }} />,
-    title: 'Transport',
-    path: '/transportation'
+    title: 'Farming & Nature',
+    items: [
+      { icon: <FaTractor className="service-icon" style={{ color: '#27AE60' }} />, title: 'Farmer', path: '/farmer-services' },
+      { icon: <BsDroplet className="service-icon" style={{ color: '#3498DB' }} />, title: 'Nature', path: '/nature' },
+      { icon: <FaTractor className="service-icon" style={{ color: '#27AE60' }} />, title: 'Agriculture', path: '/farmer-services' },
+    ]
   },
   {
-    icon: <MdHomeRepairService className="service-icon" style={{ color: '#D35400' }} />,
-    title: 'Repairs',
-    path: '/repair-services',
-    description: 'Find electricians, plumbers, AC repair, mobile repair, and bike repair services'
+    title: 'Legal & Real Estate',
+    items: [
+      { icon: <Gavel className="service-icon" style={{ color: '#8E44AD' }} />, title: 'Legal', path: '/legal' },
+      { icon: <RiHomeHeartFill className="service-icon" style={{ color: '#C0392B' }} />, title: 'Real\nEstate', path: '/real-estate' },
+    ]
   },
   {
-    icon: <MdEmergency className="service-icon" style={{ color: '#FF0000' }} />,
-    title: 'Emergency',
-    path: '/emergency'
+    title: 'Food & Media',
+    items: [
+      { icon: <FaHamburger className="service-icon" style={{ color: '#E67E22' }} />, title: 'Food', path: '/food' },
+      { icon: <FaFilm className="service-icon" style={{ color: '#2C3E50' }} />, title: 'Media', path: '/media' },
+      { icon: <MdLocalOffer className="service-icon" style={{ color: '#16A085' }} />, title: 'Event\nMgmt', path: '/event-management' },
+    ]
   },
   {
-    icon: <FaTractor className="service-icon" style={{ color: '#27AE60' }} />,
-    title: 'Farmer',
-    path: '/farmer-services',
-    description: 'Krishi bazar rates, seeds, equipment rental, and loan services'
+    title: 'Mechanics & Kirana',
+    items: [
+      { icon: <MdHomeRepairService className="service-icon" style={{ color: '#D35400' }} />, title: 'Mechanical', path: '/mechanical-services' },
+      { icon: <MdLocalGroceryStore className="service-icon" style={{ color: '#27AE60' }} />, title: 'Kirana', path: '/kirana' },
+      { icon: <BiDumbbell className="service-icon" style={{ color: '#6C5CE7' }} />, title: 'Fitness', path: '/fitness' },
+    ]
   },
-  {
-    icon: <FaFilm className="service-icon" style={{ color: '#2C3E50' }} />,
-    title: 'Media',
-    path: '/media'
-  },
-  {
-    icon: <FaHamburger className="service-icon" style={{ color: '#E67E22' }} />,
-    title: 'Food',
-    path: '/food'
-  },
-  {
-    icon: <MdLocalOffer className="service-icon" style={{ color: '#16A085' }} />,
-    title: 'Event\nMgmt',
-    path: '/event-management'
-  },
-  {
-    icon: <BsShop className="service-icon" style={{ color: '#D35400' }} />,
-    title: 'Local\nProducts',
-    path: '/local-products'
-  },
-  {
-    icon: <FaTshirt className="service-icon" style={{ color: '#E74C3C' }} />,
-    title: 'Fashion',
-    path: '/fashion'
-  },
-  {
-    icon: <BsDroplet className="service-icon" style={{ color: '#3498DB' }} />,
-    title: 'Nature',
-    path: '/nature'
-  },
-  {
-    icon: <MdLocalGroceryStore className="service-icon" style={{ color: '#27AE60' }} />,
-    title: 'Kirana',
-    path: '/kirana'
-  },
-  {
-    icon: <FaCarAlt className="service-icon" style={{ color: '#F39C12' }} />,
-    title: 'Car Hire',
-    path: '/car-hire'
-  },
-  {
-    icon: <RiHomeHeartFill className="service-icon" style={{ color: '#C0392B' }} />,
-    title: 'Real\nEstate',
-    path: '/real-estate'
-  },
-  {
-    icon: <Gavel className="service-icon" style={{ color: '#8E44AD' }} />,
-    title: 'Legal',
-    path: '/legal',
-    description: 'Legal consultation and services for property, family, criminal, and documentation matters'
-  }
 ];
 
 const promotionalApps = [
@@ -190,7 +157,38 @@ const promotionalApps = [
 
 const Home = () => {
   const navigate = useNavigate();
-  const displayedServices = services; // Show all services by default
+
+  const recordServiceClick = (key) => {
+    try {
+      const data = JSON.parse(localStorage.getItem('serviceClicks') || '{}');
+      data[key] = (data[key] || 0) + 1;
+      localStorage.setItem('serviceClicks', JSON.stringify(data));
+    } catch (e) {
+      // ignore storage errors in production UI
+    }
+  };
+
+  const sendClickToSupabase = (service, sectionTitle) => {
+    try {
+      const payload = {
+        service_title: service.title,
+        service_path: service.path,
+        section_title: sectionTitle,
+        clicked_at: new Date().toISOString(),
+        user_agent: typeof navigator !== 'undefined' ? navigator.userAgent : null,
+      };
+      // fire-and-forget; do not block navigation
+      supabase.from('service_clicks').insert(payload).then(() => {}).catch(() => {});
+    } catch (_) {
+      // no-op
+    }
+  };
+
+  const handleServiceClick = (service, sectionTitle) => {
+    recordServiceClick(service.title);
+    sendClickToSupabase(service, sectionTitle);
+    navigate(service.path);
+  };
 
   return (
     <Container maxWidth="md" sx={{ pb: 8 }}>
@@ -198,30 +196,51 @@ const Home = () => {
         <Box sx={{ mb: 3, px: 2 }}>
           <SearchBar />
         </Box>
-        <Grid container spacing={1}>
-          {displayedServices.map((service, index) => (
-            <Grid item xs={3} key={index}>
-              <ServiceItem onClick={() => navigate(service.path)}>
-                <IconWrapper>
-                  {service.icon}
-                </IconWrapper>
-                <Typography 
-                  variant="caption" 
-                  component="div"
-                  sx={{ 
-                    fontSize: '11px',
-                    lineHeight: 1.1,
-                    color: '#555',
-                    whiteSpace: 'pre-line',
-                    textAlign: 'center',
-                  }}
-                >
-                  {service.title}
-                </Typography>
-              </ServiceItem>
-            </Grid>
-          ))}
-        </Grid>
+
+        {serviceSections.map((section, sIdx) => (
+          <Box key={sIdx} sx={{ mb: 2 }}>
+            <Box sx={{ px: 1, mb: 0.5, display: 'flex', alignItems: 'center' }}>
+              <Chip label={section.title} size="small" variant="outlined" sx={{ fontWeight: 700 }} />
+            </Box>
+            <Divider light sx={{ mb: 1 }} />
+            <Box
+              sx={{
+                display: 'flex',
+                gap: 1,
+                overflowX: 'auto',
+                px: 1,
+                pb: 1,
+                scrollSnapType: 'x mandatory',
+                scrollPadding: 8,
+                '&::-webkit-scrollbar': { display: 'none' },
+                scrollbarWidth: 'none',
+              }}
+            >
+              {section.items.map((service, index) => (
+                <Box key={index} sx={{ minWidth: { xs: '31%', sm: '23%' }, scrollSnapAlign: 'start' }}>
+                  <ServiceItem onClick={() => handleServiceClick(service, section.title)}>
+                    <IconWrapper>
+                      {service.icon}
+                    </IconWrapper>
+                    <Typography
+                      variant="caption"
+                      component="div"
+                      sx={{
+                        fontSize: '11px',
+                        lineHeight: 1.1,
+                        color: '#555',
+                        whiteSpace: 'pre-line',
+                        textAlign: 'center',
+                      }}
+                    >
+                      {service.title}
+                    </Typography>
+                  </ServiceItem>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        ))}
       </Box>
     </Container>
   );
