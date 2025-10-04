@@ -80,25 +80,25 @@ const LocalProducts = () => {
   ];
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Typography variant="h4" component="h1" gutterBottom align="center" sx={{ mb: 4, color: '#1976d2' }}>
+    <Container maxWidth="lg" sx={{ py: 3 }}>
+      <Typography component="h1" gutterBottom align="center" sx={{ mb: 3, color: '#1976d2', fontWeight: 800, fontSize: { xs: '1.25rem', sm: '1.75rem' } }}>
         Local Products of Balaghat
       </Typography>
       
-      <Grid container spacing={4}>
+      <Grid container spacing={{ xs: 1.5, sm: 2.5 }}>
         {products.map((product) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
-            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', transition: 'transform 0.3s', '&:hover': { transform: 'translateY(-4px)' } }}>
+            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', borderRadius: 2, boxShadow: { xs: 1, sm: 2 }, transition: 'transform 0.25s, box-shadow 0.25s', '&:hover': { transform: { xs: 'none', sm: 'translateY(-4px)' }, boxShadow: { xs: 2, sm: 4 } } }}>
               <CardMedia
                 component="img"
-                height="200"
+                height={{ xs: 140, sm: 200 }}
                 image={product.image}
                 alt={product.name}
-                sx={{ objectFit: 'cover' }}
+                sx={{ objectFit: 'cover', borderTopLeftRadius: 8, borderTopRightRadius: 8 }}
               />
-              <CardContent sx={{ flexGrow: 1 }}>
+              <CardContent sx={{ flexGrow: 1, p: { xs: 1.5, sm: 2 } }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-                  <Typography gutterBottom variant="h6" component="h2" sx={{ mb: 0, fontWeight: 'bold' }}>
+                  <Typography gutterBottom component="h2" sx={{ mb: 0, fontWeight: 700, fontSize: { xs: '0.95rem', sm: '1.05rem' } }}>
                     {product.name}
                   </Typography>
                   <Chip 
@@ -106,15 +106,15 @@ const LocalProducts = () => {
                     size="small" 
                     color="primary" 
                     variant="outlined"
-                    sx={{ fontSize: '0.7rem' }}
+                    sx={{ fontSize: '0.68rem', height: 22, borderRadius: 1 }}
                   />
                 </Box>
                 
-                <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 1.25, fontSize: { xs: '0.8rem', sm: '0.875rem' } }}>
                   {product.description}
                 </Typography>
                 
-                <Typography variant="body2" color="primary" sx={{ fontWeight: 'bold', mb: 1 }}>
+                <Typography variant="body2" color="primary" sx={{ fontWeight: 700, mb: 1 }}>
                   Price: {product.price}
                 </Typography>
                 
@@ -124,7 +124,7 @@ const LocalProducts = () => {
                 <Box sx={{ mt: 2 }}>
                   <BookViaWhatsApp
                     buttonLabel="Enquire via WhatsApp"
-                    buttonProps={{ size: 'small' }}
+                    buttonProps={{ size: 'small', sx: { borderRadius: 1.5, textTransform: 'none', fontWeight: 600, py: 0.75 } }}
                     type="product_enquiry"
                     targetId={product.id}
                     targetName={product.name}

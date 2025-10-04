@@ -73,6 +73,11 @@ const popularDestinations = [
 
 const CarHire = () => {
   const theme = useTheme();
+  const FIXED_DISTANCE_KM = 265; // approx Balaghat ↔ Nagpur
+  const fixedTrips = [
+    { id: 'bal-nag', from: 'Balaghat', to: 'Nagpur', departLabel: 'Departs 8:00 AM', departTime: '08:00 AM' },
+    { id: 'nag-bal', from: 'Nagpur', to: 'Balaghat', departLabel: 'Departs 2:00 PM', departTime: '02:00 PM' },
+  ];
   const [pickup, setPickup] = useState('');
   const [drop, setDrop] = useState('');
   const [pickupDate, setPickupDate] = useState(new Date());
@@ -117,6 +122,34 @@ const CarHire = () => {
       vehicleNumber: `MP-${String.fromCharCode(65 + Math.floor(Math.random() * 26))}${String.fromCharCode(65 + Math.floor(Math.random() * 26))} ${Math.floor(1000 + Math.random() * 9000)}`
     });
     
+    setBookingStep(3);
+    setBookingSuccess(true);
+  };
+
+  const handleBookFixedTrip = (trip) => {
+    const car = availableCars.find(c => c.name.toLowerCase().includes('swift')) || availableCars[0];
+    const fare = Math.max(car.minFare, Math.ceil(FIXED_DISTANCE_KM * car.pricePerKm));
+    setPickup(trip.from);
+    setDrop(trip.to);
+    setSelectedCar(car);
+    setDistance(FIXED_DISTANCE_KM);
+    setBookingDetails({
+      id: `BAL${Math.floor(100000 + Math.random() * 900000)}`,
+      car,
+      pickup: trip.from,
+      drop: trip.to,
+      date: format(pickupDate, 'PPP'),
+      time: trip.departTime,
+      distance: FIXED_DISTANCE_KM,
+      totalFare: fare,
+      driver: {
+        name: `Driver ${Math.floor(10 + Math.random() * 90)}`,
+        phone: `+91 ${Math.floor(9000000000 + Math.random() * 999999999).toString().substring(0, 10)}`,
+        rating: (4 + Math.random()).toFixed(1),
+        image: `https://randomuser.me/api/portraits/men/${Math.floor(1 + Math.random() * 99)}.jpg`
+      },
+      vehicleNumber: `MP-${String.fromCharCode(65 + Math.floor(Math.random() * 26))}${String.fromCharCode(65 + Math.floor(Math.random() * 26))} ${Math.floor(1000 + Math.random() * 9000)}`
+    });
     setBookingStep(3);
     setBookingSuccess(true);
   };
@@ -202,6 +235,44 @@ const CarHire = () => {
             Search Rides
           </Button>
         </Grid>
+      </Grid>
+    </Paper>
+  );
+
+  const renderFixedSchedule = () => (
+    <Paper elevation={3} sx={{ p: 3, mb: 3, borderRadius: 2 }}>
+      <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold', mb: 2 }}>
+        Fixed Daily Route: Balaghat ↔ Nagpur
+      </Typography>
+      <Grid container spacing={2}>
+        {fixedTrips.map((t) => (
+          <Grid item xs={12} md={6} key={t.id}>
+            <Card variant="outlined" sx={{ p: 2 }}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Box>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>{t.from} → {t.to}</Typography>
+                  <Box sx={{ display: 'flex', alignItems: 'center', mt: 0.5 }}>
+                    <AccessTime fontSize="small" color="action" sx={{ mr: 0.5 }} />
+                    <Typography variant="body2" color="text.secondary">{t.departLabel}</Typography>
+                  </Box>
+                  <Typography variant="caption" color="text.secondary">Vehicle: Maruti Swift Dzire • AC Sedan</Typography>
+                </Box>
+                <Box sx={{ textAlign: 'right' }}>
+                  <Typography variant="subtitle2" color="primary">Approx. {FIXED_DISTANCE_KM} km</Typography>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    startIcon={<DirectionsCar />}
+                    sx={{ mt: 1 }}
+                    onClick={() => handleBookFixedTrip(t)}
+                  >
+                    Book
+                  </Button>
+                </Box>
+              </Box>
+            </Card>
+          </Grid>
+        ))}
       </Grid>
     </Paper>
   );
@@ -466,7 +537,12 @@ const CarHire = () => {
   
   return (
     <Container maxWidth="lg" sx={{ py: 4, pb: 12 }}>
-      {bookingStep === 1 && renderSearchForm()}
+      {bookingStep === 1 && (
+        <Box>
+          {renderFixedSchedule()}
+          {renderSearchForm()}
+        </Box>
+      )}
       {bookingStep === 2 && renderCarSelection()}
       {bookingStep === 3 && renderConfirmation()}
     </Container>
